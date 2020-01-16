@@ -1,0 +1,13 @@
+app:
+  jwtExpirationInMs: '3600000'
+  jwtSecret: JWTSuperSecretKey
+spring:
+  ldap:
+    embedded:
+      base-dn: dc=pwr,dc=com
+      ldif: classpath:localldapactivedirectory.ldif
+      port: 12345
+      validation:
+        enabled: false
+  profiles:
+    active: localdev

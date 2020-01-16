@@ -1,0 +1,5 @@
+spring:
+  datasource:
+    url: jdbc:mysql://db:3306/psi?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: root
+    password: pass
