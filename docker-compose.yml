@@ -1,0 +1,40 @@
+version: '3.6'
+
+services:
+    backend:
+        image: openjdk:8
+        volumes:
+            - ./backend:/backend
+            - ./devops/local/backend/entrypoint.sh:/devops/entrypoint.sh
+        expose:
+            - 8080
+        depends_on: 
+            - db
+        command: /devops/entrypoint.sh
+        restart: unless-stopped
+    frontend:
+        image: node:13.7.0
+        volumes:
+            - ./frontend:/frontend
+            - ./devops/local/frontend/entrypoint.sh:/devops/entrypoint.sh
+        command: /devops/entrypoint.sh
+        restart: 'no'
+    db:
+        image: mysql:5.7
+        environment:
+            - MYSQL_ROOT_PASSWORD=pass
+            - MYSQL_DATABASE=psi
+        expose:
+            - 3306
+        restart: unless-stopped
+    nginx:
+        image: nginx:1.17.8
+        volumes:
+            - ./devops/local/nginx/conf.d:/etc/nginx/conf.d
+            - ./frontend:/frontend
+        ports:
+            - 80:80
+        depends_on: 
+            - backend
+            - frontend
+        restart: unless-stopped

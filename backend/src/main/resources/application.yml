@@ -10,4 +10,4 @@ spring:
       validation:
         enabled: false
   profiles:
-    active: localdev
+    active: dev
