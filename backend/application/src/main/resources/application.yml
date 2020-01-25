@@ -10,7 +10,7 @@ spring:
       validation:
         enabled: false
   profiles:
-    active: localdev
+    active: dev
   jpa:
     hibernate:
       ddl-auto: update
