@@ -11,3 +11,6 @@ spring:
         enabled: false
   profiles:
     active: localdev
+  jpa:
+    hibernate:
+      ddl-auto: update
