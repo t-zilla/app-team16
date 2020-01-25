@@ -32,16 +32,16 @@ cn: Marek Nowak
 uid: marek
 userPassword: $2a$10$bhY3U6LEvbJ7DdWrcPqBu.vtLFPqDCgDGpTmyWrAVBcMANQzI/4Xy
 
-dn: cn=employees,ou=groups,dc=pwr,dc=com
+dn: cn=proffessors,ou=groups,dc=pwr,dc=com
 objectclass: top
-objectclass: groupOfUniqueNames
-cn: employees
-ou: employee
-uniqueMember: uid=jan,ou=people,dc=pwr,dc=com
+objectclass: groupOfNames
+cn: proffessors
+ou: proffessor
+member: uid=jan,ou=people,dc=pwr,dc=com
 
 dn: cn=deans,ou=groups,dc=pwr,dc=com
 objectclass: top
-objectclass: groupOfUniqueNames
+objectclass: groupOfNames
 cn: deans
 ou: dean
-uniqueMember: uid=marek,ou=people,dc=pwr,dc=com
+member: uid=marek,ou=people,dc=pwr,dc=com

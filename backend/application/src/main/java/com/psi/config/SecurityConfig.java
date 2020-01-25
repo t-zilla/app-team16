@@ -62,6 +62,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .ldapAuthentication()
                 .userDnPatterns("uid={0},ou=people")
                 .groupSearchBase("ou=groups")
+                .groupSearchFilter("member={0}")
+                .groupRoleAttribute("ou")
                 .contextSource(contextSource())
                 .passwordCompare()
                 .passwordEncoder(new BCryptPasswordEncoder(12))
@@ -79,4 +81,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new DefaultSpringSecurityContextSource(
                 Collections.singletonList("ldap://localhost:" + ldapPort), ldapBaseDn);
     }
+
 }
