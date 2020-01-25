@@ -13,4 +13,6 @@ spring:
     active: dev
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
+  datasource:
+    initialization-mode: always
