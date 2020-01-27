@@ -25,3 +25,7 @@ INSERT INTO subject_learning_outcome (symbol, description, learning_outcome_type
 ('P02', 'Kierunkowy efekt ksztalcenia 2', 'SOCIAL_COMPETENCES'),
 ('P03', 'Kierunkowy efekt ksztalcenia 3', 'SOCIAL_COMPETENCES'),
 ('P04', 'Kierunkowy efekt ksztalcenia 4', 'KNOWLEDGE');
+
+INSERT INTO subject_card (objectives, entry_requirements, teaching_tools, basic_literature, supplementary_literature) VALUES
+('Cel przedmiotu 1,Cel przedmiotu 2', 'Wymaganie wstepne 1,Wymaganie wstepne 2','Narzędzie dydaktyczne 1,Narzedzie dydaktyczne 2',
+ 'Literatura podstawowa 1', 'Literatura dodatkowa 1');
