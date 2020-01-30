@@ -1,6 +1,7 @@
 package com.psi.subjectcard.model;
 
 import com.psi.converter.StringListConverter;
+import com.psi.subject.model.Subject;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -9,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.util.List;
 
@@ -20,6 +23,9 @@ public class SubjectCard {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @OneToOne
+    @JoinColumn(name = "subject_id")
+    private Subject subject;
     @Column(name = "objectives")
     @Convert(converter = StringListConverter.class)
     private List<String> objectives;
