@@ -21,7 +21,7 @@ import static java.text.MessageFormat.format;
 @RestController
 @RequestMapping("/api/subject-cards")
 @RequiredArgsConstructor
-public class SubjectCardResource extends AbstractResource {
+public class SubjectCardResource implements RestResource {
 
     private final SubjectCardHandler handler;
 

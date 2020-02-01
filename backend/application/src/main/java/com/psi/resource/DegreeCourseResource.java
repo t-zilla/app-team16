@@ -20,7 +20,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/degree-courses")
-public class DegreeCourseResource {
+public class DegreeCourseResource implements RestResource{
 
     private final DegreeCourseHandler handler;
 

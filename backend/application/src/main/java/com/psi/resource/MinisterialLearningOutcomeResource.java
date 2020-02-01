@@ -12,7 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/ministerial-learning-outcomes")
 @RequiredArgsConstructor
-public class MinisterialLearningOutcomeResource {
+public class MinisterialLearningOutcomeResource implements RestResource {
 
     private final LearningOutcomeHandler handler;
 
