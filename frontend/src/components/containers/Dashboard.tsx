@@ -4,7 +4,9 @@ import {
     GetMockedSubjects, 
     GetMockedDegreeCourseLearningOutcomes, 
     GetMockedMinisterialLearningOutcomes, 
-    GetMockedSubjectLearningOutcomes 
+    GetMockedSubjectLearningOutcomes,
+    GetMockedFaculties,
+    GetMockedLecturers
   } from '../../mocks/MockedObjects';
 import './Dashboard.css';
 import { SubjectList } from '../lists/SubjectList';
@@ -16,6 +18,8 @@ import {
 import SidePanel from '../ui/SidePanel';
 import LearningOutcomeList from '../lists/LearningOutcomeList';
 import { SyllabusList } from '../lists/SyllabusList';
+import { FacultyList } from '../lists/FacultyList';
+import { LecturerList } from '../lists/LecturerList';
 
 class Dashboard extends Component {
     render() {
@@ -50,6 +54,12 @@ class Dashboard extends Component {
                         </Route>
                         <Route path="/syllabuses">
                             <SyllabusList/>
+                        </Route>
+                        <Route path="/faculties">
+                            <FacultyList facultyList={GetMockedFaculties()}></FacultyList>
+                        </Route>
+                        <Route path="/lecturers">
+                            <LecturerList lecturerList={GetMockedLecturers()}></LecturerList>
                         </Route>
                     </Switch>
                     <SidePanel/>

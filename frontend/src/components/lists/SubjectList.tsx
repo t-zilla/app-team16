@@ -29,6 +29,5 @@ export const SubjectList = ({subjectList}: SubjectsProps) => {
             </div>
             <ul className="row subjects-list">{subjects}</ul>
         </div>
-        
     );
 };

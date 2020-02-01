@@ -1,8 +1,11 @@
 import Subject from '../models/Subject';
-import { SubjectLearningArea, LearningOutcomeType } from '../models/EnumerationTypes';
+import { SubjectLearningArea, LearningOutcomeType, LanguageOfStudy } from '../models/EnumerationTypes';
 import SubjectLearningOutcome from '../models/SubjectLearningOutcome';
 import MinisterialLearningOutcome from '../models/MinisterialLearningOutcome';
 import DegreeCourseLearningOutcome from '../models/DegreeCourseLearningOutcome';
+import { ProgramContent } from '../models/ProgramContent';
+import { Faculty } from '../models/Faculty';
+import Lecturer from '../models/Lecturer';
 
 export function GetMockedSubjects(): Subject[] {
     return [
@@ -34,5 +37,28 @@ export function GetMockedDegreeCourseLearningOutcomes(): DegreeCourseLearningOut
         new DegreeCourseLearningOutcome("DEK0", LearningOutcomeType.SocialCompetences, "DEK0 - opis"),
         new DegreeCourseLearningOutcome("DEK2", LearningOutcomeType.SocialCompetences, "DEK1 - opis"),
         new DegreeCourseLearningOutcome("DEK1", LearningOutcomeType.SocialCompetences, "DEK2 - opis")
+    ];
+};
+
+export function GetMockedFaculties(): Faculty[] {
+    return [
+        new Faculty("Informatyka", LanguageOfStudy.Polish),
+        new Faculty("Computer Science", LanguageOfStudy.English),
+        new Faculty("Architecture", LanguageOfStudy.English)
+    ];
+};
+
+export function GetMockedLecturers(): Lecturer[] {
+    return [
+        new Lecturer("Jan", "Kowalski"),
+        new Lecturer("Stefan", "Kowalski"),
+        new Lecturer("Jarosław", "Malina"),
+        new Lecturer("Agnieszka", "Sęp")
+    ];
+};
+
+export function GetMockedProgram(): ProgramContent[] {
+    return [
+        
     ];
 };

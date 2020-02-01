@@ -1,0 +1,5 @@
+.faculties {
+    flex-wrap: wrap;
+    list-style: none;
+    flex: 8;
+}   
