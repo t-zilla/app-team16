@@ -1,0 +1,12 @@
+.learning-outcomes__list {
+    margin: 0;
+    padding: 0;
+}
+
+.learning-outcomes {
+    flex-wrap: wrap;
+    list-style: none;
+    flex: 8;
+};
+
+

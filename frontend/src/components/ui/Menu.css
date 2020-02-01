@@ -1,0 +1,22 @@
+.active .list-btn {
+    color: #fa5c2b;
+}
+
+.menu {
+    flex: 2;
+}
+
+.menu__options-wrapper {
+    list-style: none;
+    padding: 0;
+}
+
+.menu__header {
+    color: #b7bfca;
+    text-transform: uppercase;
+    font-size: 1em;
+}
+
+a {
+    text-decoration: none;
+}

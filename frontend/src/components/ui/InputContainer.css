@@ -1,0 +1,45 @@
+.input-container input {
+    padding: 0.5em 1em;
+    flex-grow: 1;
+    border-radius: 0.5em;
+    background: white;
+    display: block;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    color: #1f1f1f;
+    font-size: 400;
+    border: 1px solid transparent;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 16px 0;
+}
+
+.input-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-container input:focus,
+.input-container input:active {
+    outline: none;
+    box-shadow: 0 5px 15px #fa5c2b;
+}
+
+.selection-input-container label,
+.input-container label {
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 0.7em;
+    color: #fa5c2b;
+    margin: 16px 0;
+}
+
+.input-container {
+    position: relative;
+    width: calc(100% - 64px);
+    margin: 16px 32px;
+    box-sizing: content-box;
+}
+
+.selection-input-container {
+
+}

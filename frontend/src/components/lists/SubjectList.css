@@ -1,0 +1,13 @@
+.section-header {
+    font-weight: 300;
+}
+
+.subjects-list {
+    padding: 0;
+}
+
+.subjects {
+    flex-wrap: wrap;
+    list-style: none;
+    flex: 8;
+};

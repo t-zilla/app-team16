@@ -1,0 +1,46 @@
+.list-btn {
+    padding: 0.5em 0;
+    border: none;
+    color: #79838f;
+    font-weight: 600;
+    margin: 0.3em 0;
+    background: transparent;
+    font-size: 0.9em;
+    font-weight: 700;
+}
+
+.main-btn {
+    background: #fa5c2b;
+    display: inline-block;
+    overflow: auto;
+    height: auto;
+    display: inline-block;
+    margin: 25px;
+    height: 40px;
+    border-radius: 10px;
+    cursor: pointer;
+    border: none;
+    color: white;
+    font-family: 'Nunito', sans-serif!important;
+    font-weight: 800;
+    padding: 0 2em;
+    transition: background 250ms ease-in-out, transform 150ms ease;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-transform: uppercase;
+    font-size: 0.7em;
+    letter-spacing: 0.1em;
+}
+
+.main-btn:hover,
+.main-btn:focus {
+    background: #d3491f;
+}
+
+.main-btn:focus {
+    outline: none;
+}
+
+.main-btn:active {
+    transform: scale(0.99);
+}

@@ -1,0 +1,18 @@
+.user-tile {
+    max-width: 50px;
+    max-height: 50px;
+    background: black;
+    border-radius: 10px;
+    margin: auto;
+    position: relative;
+    overflow: hidden;
+    margin-top: 25px;
+};
+
+.user-tile__avatar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+};

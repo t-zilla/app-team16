@@ -1,0 +1,34 @@
+.subject-creator {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.subject-creator__background {
+    content: '';
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: black;
+    opacity: 0.2;
+    z-index: -1;
+    cursor: pointer;
+}
+
+.subject-creator form {
+    align-content: center;
+    background: white;
+    padding: 64px;
+    margin: auto;
+    border-radius: 1em;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    width: 500px;
+}
