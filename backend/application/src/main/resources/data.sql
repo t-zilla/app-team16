@@ -26,9 +26,19 @@ INSERT INTO subject_learning_outcome (id, symbol, description, learning_outcome_
 (3, 'P03', 'Kierunkowy efekt ksztalcenia 3', 'SOCIAL_COMPETENCES'),
 (4, 'P04', 'Kierunkowy efekt ksztalcenia 4', 'KNOWLEDGE');
 
-INSERT INTO subject (id, code, polish_name, english_name, subject_learning_area) VALUES
-(1, 'C1', 'Bazy danych', 'Databases', 'INFORMATION_TECHNOLOGY');
+INSERT INTO researcher (id, first_name, last_name, position, academic_degree) VALUES
+(1, 'Marek', 'Nowak', 'LECTURER', 'DOCTOR');
+
+INSERT INTO subject (id, code, polish_name, english_name, subject_learning_area, researcher_id) VALUES
+(1, 'C1', 'Bazy danych', 'Databases', 'INFORMATION_TECHNOLOGY', 1);
 
 INSERT INTO subject_card (id, objectives, entry_requirements, teaching_tools, basic_literature, supplementary_literature, subject_id) VALUES
 (1, 'Cel przedmiotu 1,Cel przedmiotu 2', 'Wymaganie wstepne 1,Wymaganie wstepne 2','Narzędzie dydaktyczne 1,Narzedzie dydaktyczne 2',
  'Literatura podstawowa 1', 'Literatura dodatkowa 1', 1);
+
+INSERT INTO program_content (id, lp, course_form, content, hours_amount, subject_card_id) VALUES
+(1, 1, 'LECTURE', 'Treść programowa', 10, 1);
+
+INSERT INTO course (id, code, zzu, cnps, ects, credit_form, final_course, course_form, hours_weekly, language_level, leading_course_id) VALUES
+(1, 'c1', 90, 200, 4, 'EXAM', false, 'LECTURE', 15, null, null),
+(2, 'c12', 90, 200, 4, 'EXAM', false, 'PROJECT', 15, null, 1);

@@ -18,7 +18,7 @@ import static java.text.MessageFormat.format;
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
 @Slf4j
-public class AuthResource {
+public class AuthResource implements RestResource{
 
     private final AuthService authService;
 

@@ -2,9 +2,9 @@ package com.psi.resource;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 
-public abstract class AbstractResource {
+public interface RestResource {
 
-    protected String getCurrentUsername() {
+    default String getCurrentUsername() {
         return SecurityContextHolder.getContext().getAuthentication().getName();
     }
 

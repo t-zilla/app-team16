@@ -15,7 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/specialities")
 @RequiredArgsConstructor
-public class SpecialityResource {
+public class SpecialityResource implements RestResource {
 
     private final SpecialityHandler handler;
 
