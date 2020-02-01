@@ -1,0 +1,34 @@
+.subjects__subject-item__stats {
+    list-style: none;
+    padding: 0;
+}
+
+.subjects__subject-item__stats li {
+    background: #f8f8f8;
+    font-weight: 700;
+    font-size: 0.8em;
+    padding: 0.4em;
+    display: inline-block;
+    margin: 0.4em 0;
+    margin-right: 0.4em;
+    border-radius: 0.4em;
+    color: #808a96
+}
+
+.label {
+    font-weight: 900;
+}
+
+.subjects__subject-item {
+    padding: 2.5em;
+    margin-right: 1.5em;
+    margin-top: 1.5em;
+    flex-grow: 1;
+    border-radius: 1em;
+    background: white;
+    display: block;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    color: #1f1f1f;
+    font-size: 400;
+};

@@ -6,7 +6,8 @@ import {
     GetMockedMinisterialLearningOutcomes, 
     GetMockedSubjectLearningOutcomes,
     GetMockedFaculties,
-    GetMockedLecturers
+    GetMockedLecturers,
+    GetMockedSyllabuses
   } from '../../mocks/MockedObjects';
 import './Dashboard.css';
 import { SubjectList } from '../lists/SubjectList';
@@ -53,7 +54,7 @@ class Dashboard extends Component {
                             />
                         </Route>
                         <Route path="/syllabuses">
-                            <SyllabusList/>
+                            <SyllabusList syllabusList={GetMockedSyllabuses()}/>
                         </Route>
                         <Route path="/faculties">
                             <FacultyList facultyList={GetMockedFaculties()}></FacultyList>

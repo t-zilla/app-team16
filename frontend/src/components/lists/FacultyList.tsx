@@ -1,14 +1,16 @@
 import React from 'react';
-import { Faculty } from '../../models/Faculty';
+import Faculty from '../../models/Faculty';
 import './FacultyList.css'
 import { NavLink, Route } from 'react-router-dom';
 import { FunctionalButton } from '../ui/Button';
+import { FacultyItem } from './items/FacultyItem';
 
 type FacultyListProps = {
     facultyList: Faculty[];
 };
 
 export const FacultyList = ({facultyList}: FacultyListProps) => {
+    const faculties = facultyList.map((faculty, index) => <FacultyItem key={index} faculty={faculty}/> );
     return (
         <div className="faculties">
             <div className="row">
@@ -23,6 +25,7 @@ export const FacultyList = ({facultyList}: FacultyListProps) => {
                     
                 </Route>
             </div>
+            <ul className="row faculty-list">{faculties}</ul>
         </div>
     );
 };

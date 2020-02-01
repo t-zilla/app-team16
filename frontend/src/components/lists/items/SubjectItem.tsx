@@ -1,6 +1,8 @@
 import React from 'react';
 import './SubjectItem.css';
-import Subject from '../../models/Subject';
+import Subject from '../../../models/Subject';
+import { SubjectPage } from '../../single-pages/SubjectPage';
+import { NavLink, Route } from 'react-router-dom';
 
 type SubjectItemProps = {
     subject: Subject;
@@ -8,6 +10,7 @@ type SubjectItemProps = {
 
 export const SubjectItem = ({subject}: SubjectItemProps) => {
     return (
+        <NavLink to={"/subjects/" + subject.code}>
         <li className="subjects__subject-item">
             <h5>{subject.code}</h5>
             <h4>{subject.polishName}</h4>
@@ -18,5 +21,9 @@ export const SubjectItem = ({subject}: SubjectItemProps) => {
                 <li>{subject.courses ? subject.courses.length : "Brak kursów"}</li>
             </ul>
         </li>
+        <Route path="/subjects/:id">
+            <SubjectPage/>
+        </Route>
+        </NavLink>
     );
 };

@@ -1,12 +1,14 @@
-import { StudyDegree, FormOfStudy, LearningProfile, ProfessionalTitle } from "./EnumerationTypes";
+import { StudyDegree, FormOfStudy, LearningProfile } from "./enum-types/EnumerationTypes";
+import { ProfessionalTitle } from './enum-types/ProfessionalTitle';
 import { Term } from "./Term";
 
-export class Syllabus {
+export default class Syllabus {
 
     readonly MaxTermAmount = 7;
     readonly MaxExtendedTermAmount = 8;
 
     constructor (
+        name: string,
         modificationDate: Date,
         studyDegree: StudyDegree,
         studyForm: FormOfStudy,
@@ -22,6 +24,7 @@ export class Syllabus {
         cnpsMultiplier: number,
         extendedTermAmount: boolean,
     ) {
+        this.name = name;
         this.modificationDate = modificationDate;
         this.studyDegree = studyDegree;
         this.studyForm = studyForm;
@@ -38,6 +41,7 @@ export class Syllabus {
         this.extendedTermAmount = extendedTermAmount;
     }
 
+    name: string;
     modificationDate: Date;
     studyDegree: StudyDegree
     studyForm: FormOfStudy;
@@ -55,3 +59,4 @@ export class Syllabus {
     examIssues?: string[];
     terms?: Term[]
 };
+

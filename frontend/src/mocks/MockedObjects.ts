@@ -1,17 +1,23 @@
 import Subject from '../models/Subject';
-import { SubjectLearningArea, LearningOutcomeType, LanguageOfStudy } from '../models/EnumerationTypes';
+import { SubjectLearningArea, StudyDegree, FormOfStudy, LearningProfile } from '../models/enum-types/EnumerationTypes';
+import { ProfessionalTitle } from '../models/enum-types/ProfessionalTitle';
+import { LanguageOfStudy } from '../models/enum-types/LanguageOfStudy';
+import { LearningOutcomeType } from '../models/enum-types/LearningOutcomeType';
 import SubjectLearningOutcome from '../models/SubjectLearningOutcome';
 import MinisterialLearningOutcome from '../models/MinisterialLearningOutcome';
 import DegreeCourseLearningOutcome from '../models/DegreeCourseLearningOutcome';
 import { ProgramContent } from '../models/ProgramContent';
-import { Faculty } from '../models/Faculty';
+import Faculty from '../models/Faculty';
 import Lecturer from '../models/Lecturer';
+import Syllabus from '../models/Syllabus';
 
 export function GetMockedSubjects(): Subject[] {
     return [
         new Subject("0xswe2", "Informatyka", "Computer science", SubjectLearningArea.InformationTechnology, 5, 10, 10),
         new Subject("1awed4", "Analiza matematyczna", "Methematical analysis", SubjectLearningArea.Math, 6, 10, 10),
         new Subject("1wae21", "Analiza matematyczna", "Methematical analysis", SubjectLearningArea.Math, 6, 10, 10),
+        new Subject("221wwe", "Analiza matematyczna", "Methematical analysis", SubjectLearningArea.Math, 6, 10, 10),
+        new Subject("221wwe", "Analiza matematyczna", "Methematical analysis", SubjectLearningArea.Math, 6, 10, 10),
         new Subject("221wwe", "Analiza matematyczna", "Methematical analysis", SubjectLearningArea.Math, 6, 10, 10)
     ];
 };
@@ -54,6 +60,15 @@ export function GetMockedLecturers(): Lecturer[] {
         new Lecturer("Stefan", "Kowalski"),
         new Lecturer("Jarosław", "Malina"),
         new Lecturer("Agnieszka", "Sęp")
+    ];
+};
+
+export function GetMockedSyllabuses(): Syllabus[] {
+    return [
+        new Syllabus("W8 - Informatyka", new Date(), StudyDegree.FirstDegree, FormOfStudy.Stationary, LearningProfile.Practical, 
+            7, "Matura z informatyki", ProfessionalTitle.BachelorOfEngineering, "Egzamin", "Potrafi w komputery", 210, 210, 210, 1, false),
+        new Syllabus("W4 - Informatyka", new Date(), StudyDegree.FirstDegree, FormOfStudy.Stationary, LearningProfile.Practical, 
+            7, "Matura z informatyki", ProfessionalTitle.BachelorOfEngineering, "Egzamin", "Potrafi w komputery", 420, 210, 210, 2, false)
     ];
 };
 

@@ -1,3 +1,12 @@
+.section-header {
+    font-weight: 300;
+}
+
+.faculty-list {
+    padding: 0;
+    flex-wrap: wrap;
+}
+
 .faculties {
     flex-wrap: wrap;
     list-style: none;

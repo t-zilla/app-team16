@@ -1,7 +1,7 @@
-import { LanguageOfStudy } from "./EnumerationTypes";
+import { LanguageOfStudy } from "./enum-types/LanguageOfStudy";
 import { Speciality } from "./Speciality";
 
-export class Faculty {
+export default class Faculty {
 
     constructor (
         name: string,

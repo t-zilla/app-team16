@@ -2,8 +2,7 @@ import React, { Component, FormEvent } from 'react';
 import './SubjectCreator.css';
 import { FunctionalButton } from '../ui/Button';
 import { NavLink, Redirect } from "react-router-dom";
-import { LearningOutcomeType } from '../../models/EnumerationTypes';
-import { LearningOutcomeTypeToStrMap, StringToLearningOutcomeType } from '../../models/LearningOutcome';
+import { LearningOutcomeType, LearningOutcomeTypeToStrMap, StringToLearningOutcomeType } from '../../models/enum-types/LearningOutcomeType';
 import SelectionInputContainer from '../ui/SelectionInputContainer';
 import InputContainer from '../ui/InputContainer';
 

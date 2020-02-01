@@ -4,6 +4,7 @@
 
 .subjects-list {
     padding: 0;
+    flex-wrap: wrap;
 }
 
 .subjects {

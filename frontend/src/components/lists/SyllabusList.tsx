@@ -2,8 +2,15 @@ import React from 'react';
 import './SyllabusList.css';
 import { NavLink, Route } from 'react-router-dom';
 import { FunctionalButton } from '../ui/Button';
+import Syllabus from '../../models/Syllabus';
+import { SyllabusItem } from './items/SyllabusItem';
 
-export const SyllabusList = () => {
+type SyllabusListProps = {
+    syllabusList: Syllabus[];
+};
+
+export const SyllabusList = ({syllabusList}: SyllabusListProps) => {
+    const syllabuses = syllabusList.map((syllabus, index) => <SyllabusItem key={index} syllabus={syllabus}/> );
     return (
         <div className="syllabuses">
             <div className="row">
@@ -18,6 +25,7 @@ export const SyllabusList = () => {
                     
                 </Route>
             </div>
+            <ul className="row syllabuses-list">{syllabuses}</ul>
         </div>
     );
 };

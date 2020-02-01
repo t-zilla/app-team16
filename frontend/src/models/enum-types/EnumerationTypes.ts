@@ -1,10 +1,3 @@
-export enum LearningOutcomeType {
-    Undefined,
-    Knowledge,
-    Skills,
-    SocialCompetences
-};
-
 export enum LearningOutcomeArea {
     Science,
     NaturalSciences,
@@ -41,17 +34,6 @@ export enum LanguageLevel {
 export enum KRKLevel {
     Level_6,
     Level_8
-};
-
-export enum LanguageOfStudy {
-    Polish,
-    English
-};
-
-export enum ProfessionalTitle {
-    Bachelor,
-    Master,
-    BachelorOfEngineering
 };
 
 export enum SubjectLearningArea {
@@ -95,3 +77,4 @@ export enum StudyDegree {
     ThirdDegree,
     UniformMasterDegree
 };
+
