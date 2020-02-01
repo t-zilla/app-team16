@@ -21,6 +21,8 @@ services:
         restart: 'no'
     db:
         image: mysql:5.7
+        volumes:
+            - db-data:/var/lib/mysql
         environment:
             - MYSQL_ROOT_PASSWORD=pass
             - MYSQL_DATABASE=psi
@@ -32,9 +34,14 @@ services:
         volumes:
             - ./devops/local/nginx/conf.d:/etc/nginx/conf.d
             - ./frontend:/frontend
+            - nginx-logs:/var/log/nginx
         ports:
             - 80:80
         depends_on: 
             - backend
             - frontend
         restart: unless-stopped
+
+volumes:
+    db-data:
+    nginx-logs:
