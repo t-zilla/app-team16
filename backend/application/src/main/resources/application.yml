@@ -13,7 +13,11 @@ spring:
     active: dev
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
+      connection: 
+        CharSet: utf-8
+        characterEncoding: utf-8
+        useUnicode: true
   datasource:
     initialization-mode: always
   server:
