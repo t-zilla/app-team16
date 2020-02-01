@@ -16,3 +16,5 @@ spring:
       ddl-auto: create
   datasource:
     initialization-mode: always
+  server:
+    use-forward-headers: true
