@@ -1,6 +1,7 @@
 package com.psi.learningoutcome.model;
 
 import lombok.Data;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.Column;
 import javax.persistence.EnumType;
@@ -12,6 +13,7 @@ import javax.persistence.MappedSuperclass;
 
 @Data
 @MappedSuperclass
+@SuperBuilder
 public abstract class AbstractLearningOutcome {
 
     @Id

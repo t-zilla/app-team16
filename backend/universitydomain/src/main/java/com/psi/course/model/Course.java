@@ -1,5 +1,6 @@
 package com.psi.course.model;
 
+import com.psi.subject.model.Subject;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -22,28 +23,42 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
+
     @Column(name = "code")
     private String code;
+
     @Column(name = "zzu")
     private Integer zzu;
+
     @Column(name = "cnps")
     private Integer cnps;
+
     @Column(name = "ects")
     private Integer ects;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "credit_form")
     private CreditForm creditForm;
+
     @Column(name = "final_course")
     private Boolean finalCourse;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "course_form")
     private CourseForm courseForm;
+
     @Column(name = "hours_weekly")
     private Integer hoursWeekly;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "language_level")
     private LanguageLevel languageLevel;
+
     @ManyToOne
     @JoinColumn(name = "leading_course_id")
     private Course leadingCourse;
+
+    @ManyToOne
+    @JoinColumn(name = "subject_id")
+    private Subject subject;
 }

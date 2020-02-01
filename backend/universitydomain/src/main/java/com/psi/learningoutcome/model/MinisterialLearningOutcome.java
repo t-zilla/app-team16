@@ -1,6 +1,8 @@
 package com.psi.learningoutcome.model;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +11,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.Table;
 
 @Data
+@SuperBuilder
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "ministerial_learning_outcome")
 public class MinisterialLearningOutcome extends AbstractLearningOutcome {

@@ -24,15 +24,20 @@ public class ProgramContent {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
+
     @Column(name = "lp")
     private Integer lp;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "course_form")
     private CourseForm courseForm;
+
     @Column(name = "content")
     private String content;
+
     @Column(name = "hours_amount")
     private Integer hoursAmount;
+
     @ManyToOne
     @JoinColumn(name = "subject_card_id")
     private SubjectCard subjectCard;
