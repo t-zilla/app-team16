@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    service: backend
+  name: backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      service: backend
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        service: backend
+    spec:
+      containers:
+      - image: localhost:5000/team16-backend
+        imagePullPolicy: Always
+        name: backend
+        ports:
+          - containerPort: 8080
+        resources: {}
+      restartPolicy: Always
+status: {}
