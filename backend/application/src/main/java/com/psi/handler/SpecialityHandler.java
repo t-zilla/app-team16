@@ -1,6 +1,8 @@
 package com.psi.handler;
 
+import com.psi.speciality.dto.SpecialityCreationDto;
 import com.psi.speciality.dto.SpecialityDto;
+import com.psi.speciality.repository.SpecialitySpecification;
 import com.psi.speciality.service.SpecialityService;
 import com.psi.speciality.translator.SpecialityTranslator;
 import lombok.RequiredArgsConstructor;
@@ -12,13 +14,25 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SpecialityHandler {
 
-    private final SpecialityService service;
+    private final SpecialityService specialityService;
 
-    public List<SpecialityDto> getSpecialities() {
-        return SpecialityTranslator.toDto(service.getSpecialities());
+    public List<SpecialityDto> getSpecialities(Long degreeCourseId) {
+        return SpecialityTranslator.toDto(specialityService.getSpecialities(new SpecialitySpecification(degreeCourseId)));
     }
 
     public SpecialityDto getSpeciality(Long id) {
-        return SpecialityTranslator.toDto(service.getSpecialities(id));
+        return SpecialityTranslator.toDto(specialityService.getSpeciality(id));
+    }
+
+    public SpecialityDto createSpeciality(SpecialityCreationDto dto) {
+        return SpecialityTranslator.toDto(specialityService.createSpeciality(dto));
+    }
+
+    public SpecialityDto updateSpeciality(Long id, SpecialityCreationDto dto) {
+        return SpecialityTranslator.toDto(specialityService.updateSpeciality(id, dto));
+    }
+
+    public void removeSpeciality(Long id) {
+        specialityService.removeSpeciality(id);
     }
 }

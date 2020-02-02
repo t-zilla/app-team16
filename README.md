@@ -34,6 +34,16 @@ LDAP Active Directory users:
 - Jan Abacki
   - username: jan
   - password: secret
+  - role: researcher
+- Lech Wojcik
+  - username: lech
+  - password: secret
+  - role: syllabus_author  
+- Jozef Malinowski
+  - username: jozef
+  - password: secret
+  - role: program_committee    
 - Marek Nowak
   - username: marek
   - password: secret
+  - role: administrator

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -26,10 +27,10 @@ public class SubjectCardResource implements RestResource {
     private final SubjectCardHandler handler;
 
     @GetMapping
-    public List<SubjectCardDto> getSubjectCards() {
+    public List<SubjectCardDto> getSubjectCards(@RequestParam(value = "subjectId", required = false) Long subjectId) {
         log.info(format("[{0}] requested Subject Cards list", getCurrentUsername()));
 
-        return handler.getSubjectCards();
+        return handler.getSubjectCards(subjectId);
     }
 
     @PutMapping("/{id}")
