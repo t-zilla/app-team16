@@ -18,6 +18,8 @@
     color: #1f1f1f;
     font-size: 400;
     display: flex;
+    text-align: center;
+    justify-content: center;
 };
 
 

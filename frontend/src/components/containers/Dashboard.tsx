@@ -25,8 +25,9 @@ import SyllabusPage from '../single-pages/SyllabusPage';
 import SubjectCreator from '../inputs/SubjectCreator';
 import SubjectPage from '../single-pages/SubjectPage';
 import FacultyPage from '../single-pages/FacultyPage';
-import { LearningOutcomePage } from '../single-pages/LearningOutcomePage';
+import LearningOutcomePage, { LearningOutcomeSource } from '../single-pages/LearningOutcomePage';
 import SyllabusCreator from '../inputs/SyllabusCreator';
+import MinisterialLearningOutcome from '../../models/MinisterialLearningOutcome';
 
 class Dashboard extends Component {
     render() {
@@ -43,6 +44,7 @@ class Dashboard extends Component {
                                 outcomes={GetMockedMinisterialLearningOutcomes()}
                                 outcomesName="Ministerialne efekty kształcenia"
                                 outcomesPath="/ministerial-outcomes"
+                                outcomesSinglePath="/ministerial-outcome"
                             />
                         </Route>
                         <Route exact path="/degree-course-outcomes">
@@ -50,6 +52,7 @@ class Dashboard extends Component {
                                 outcomes={GetMockedDegreeCourseLearningOutcomes()}
                                 outcomesName="Kierunkowe efekty kształcenia"
                                 outcomesPath="/degree-course-outcomes"
+                                outcomesSinglePath="/degree-course-outcome"
                             />
                         </Route>
                         <Route exact path="/subject-outcomes">
@@ -57,6 +60,7 @@ class Dashboard extends Component {
                                 outcomes={GetMockedSubjectLearningOutcomes()}
                                 outcomesName="Przedmiotowe efekty kształcenia"
                                 outcomesPath="/subject-outcomes"
+                                outcomesSinglePath="/subject-outcome"
                             />
                         </Route>
                         <Route exact path="/syllabuses">
@@ -78,13 +82,22 @@ class Dashboard extends Component {
                             <FacultyPage facultyId={0}/>
                         </Route>
                         <Route path="/ministerial-outcome/:id">
-                            <LearningOutcomePage/>
+                            <LearningOutcomePage 
+                                learningOutcomeId={0}
+                                source={LearningOutcomeSource.Ministerial}
+                            />
                         </Route>
                         <Route path="/degree-course-outcome/:id">
-                            <LearningOutcomePage/>
+                            <LearningOutcomePage 
+                                learningOutcomeId={0}
+                                source={LearningOutcomeSource.DegreeCourse}
+                            />
                         </Route>
                         <Route path="/subject-outcome/:id">
-                            <LearningOutcomePage/>
+                            <LearningOutcomePage 
+                                learningOutcomeId={0}
+                                source={LearningOutcomeSource.Subject}
+                            />
                         </Route>
                         <Route exact path="/syllabuses/create">                
                             <SyllabusCreator/>

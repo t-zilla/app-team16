@@ -13,7 +13,7 @@ export const FacultyItem = ({faculty}: FacultyItemProps) => {
     return (
         <NavLink to={"/faculty/" + faculty.id}>
             <li className="faculties__faculty-item">
-                <h4>{faculty.name} <span className="label">{LanguageOfStudyTypeToString(faculty.languageOfStudy)}</span></h4>
+                <h5>{faculty.name} <span className="label">{LanguageOfStudyTypeToString(faculty.languageOfStudy)}</span></h5>
             </li>
         </NavLink>
     );

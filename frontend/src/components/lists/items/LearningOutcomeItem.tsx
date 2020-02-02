@@ -3,24 +3,21 @@ import LearningOutcome from '../../../models/LearningOutcome';
 import { LearningOutcomeTypeToString } from '../../../models/enum-types/LearningOutcomeType';
 import './LearningOutcomeItem.css';
 import { NavLink, Route } from 'react-router-dom';
-import { LearningOutcomePage } from '../../single-pages/LearningOutcomePage';
+import LearningOutcomePage from '../../single-pages/LearningOutcomePage';
 
 type LearningOutcomeItemProps = {
     learningOutcome: LearningOutcome;
-    outcomesPath: string;
+    outcomesSinglePath: string;
 }
 
-export const LearningOutcomeItem = ({learningOutcome, outcomesPath}: LearningOutcomeItemProps) => {
+export const LearningOutcomeItem = ({learningOutcome, outcomesSinglePath}: LearningOutcomeItemProps) => {
     return (
-        <NavLink to={outcomesPath + "/" + learningOutcome.id}>
+        <NavLink to={outcomesSinglePath + "/" + learningOutcome.id}>
         <li className="learning-outcomes__item row">
-            <div className="learning-outcomes__item__detail"><h4>{learningOutcome.symbol}</h4></div>
-            <div className="learning-outcomes__item__detail"><h4 className="label">{LearningOutcomeTypeToString(learningOutcome.type)}</h4></div>
-            <div className="learning-outcomes__item__detail"><p><i>{learningOutcome.description}...</i></p></div>
+            <div className="learning-outcomes__item__detail"><h5>{learningOutcome.symbol}</h5></div>
+            <div className="learning-outcomes__item__detail"><h5 className="label">{LearningOutcomeTypeToString(learningOutcome.type)}</h5></div>
+            <div className="learning-outcomes__item__detail"><h5><i>{learningOutcome.description}...</i></h5></div>
         </li>
-        <Route path={outcomesPath + "/:id"}>
-            <LearningOutcomePage/>
-        </Route>
         </NavLink>
     );
 };

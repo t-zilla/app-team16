@@ -4,6 +4,7 @@
 
 .menu {
     flex: 2;
+    margin-top: 16px;
 }
 
 .menu__options-wrapper {

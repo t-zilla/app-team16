@@ -12,7 +12,7 @@ export const SyllabusItem = ({syllabus}: SyllabusItemProps) => {
     return (
         <NavLink to={"/syllabus/" + syllabus.id}>
         <li className="syllabuses__syllabus-item">
-            <h4>{syllabus.name} <span className="label">{ProfessionalTitleTypeToString(syllabus.professionalTitle)}</span></h4>
+            <h5>{syllabus.name} <span className="label">{ProfessionalTitleTypeToString(syllabus.professionalTitle)}</span></h5>
             <ul className="syllabuses__syllabus-item__stats">
                 <li>Suma ECTS <span className="label">{syllabus.ectsSum}</span> </li>
                 <li>Suma CNPS <span className="label">{syllabus.cnpsSum}</span></li>
@@ -21,6 +21,5 @@ export const SyllabusItem = ({syllabus}: SyllabusItemProps) => {
             </ul>
         </li>
         </NavLink>
-        
     );
 };

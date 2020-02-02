@@ -9,10 +9,11 @@ type LearningOutcomesProps = {
     outcomesName: string;
     outcomes: LearningOutcome[];
     outcomesPath: string;
+    outcomesSinglePath: string;
 };
 
-const LearningOutcomeList = ({outcomes, outcomesName, outcomesPath} : LearningOutcomesProps) => {
-    const outcomesItemList = outcomes.map((outcome) => <LearningOutcomeItem learningOutcome={outcome} outcomesPath={outcomesPath}/>)
+const LearningOutcomeList = ({outcomes, outcomesName, outcomesPath, outcomesSinglePath} : LearningOutcomesProps) => {
+    const outcomesItemList = outcomes.map((outcome) => <LearningOutcomeItem learningOutcome={outcome} outcomesSinglePath={outcomesSinglePath}/>)
     return (
         <div className="learning-outcomes">
             <div className="row">

@@ -11,6 +11,8 @@ import { FormOfStudy, StringToFormOfStudy, FormOfStudyToStrMap } from '../../mod
 import { StudyDegree, StringToStudyDegree, StudyDegreeToStrMap } from '../../models/enum-types/StudyDegree';
 import { Term } from '../../models/Term';
 import { JSXElement } from '@babel/types';
+import DegreeCourseLearningOutcome from '../../models/DegreeCourseLearningOutcome';
+import DynamicMultiLineContainer from '../ui/DynamicMultiLineContainer';
 
 type SyllabusCreatorProps = {};
 
@@ -32,6 +34,8 @@ type SyllabusCreatorState = {
     extendedTermAmount: boolean;
     examIssues: string[];
     terms?: Term[];
+    degreeCourseLearningOutcomeCodes?: string[];
+    degreeCourseLearningOutcomeCodesStr: string,
     currentStep: number;
     toSyllabuses: boolean;
 };
@@ -39,6 +43,7 @@ type SyllabusCreatorState = {
 class SyllabusCreator extends Component<SyllabusCreatorProps, SyllabusCreatorState> { 
     private readonly FirstStep: number = 1;
     private readonly LastStep: number = 3;
+    private readonly StringArrayDelimeter: string = '\n';
 
     constructor(props: SyllabusCreatorProps) {
         super(props);
@@ -60,6 +65,8 @@ class SyllabusCreator extends Component<SyllabusCreatorProps, SyllabusCreatorSta
             extendedTermAmount: false,
             examIssues: [],
             terms: [],
+            degreeCourseLearningOutcomeCodes: [],
+            degreeCourseLearningOutcomeCodesStr: '',
             currentStep: this.FirstStep,
             toSyllabuses: false
         };
@@ -96,6 +103,7 @@ class SyllabusCreator extends Component<SyllabusCreatorProps, SyllabusCreatorSta
     handleZzuSumChange = (e: React.FormEvent<HTMLInputElement>) => this.setState({zzuSum: Number.parseInt(e.currentTarget.value)});
     handleExtendedTermAmountChange = (e: React.FormEvent<HTMLInputElement>) => this.setState({extendedTermAmount: e.currentTarget.value ? true : false});
     handleExamIssuesChange = (e: React.FormEvent<HTMLInputElement>) => this.setState({examIssues: e.currentTarget.value.split("\n")});
+    handleDegreeCourseLearningOutcomeCodesStrChange = (e: React.FormEvent<HTMLInputElement>) => this.setState({degreeCourseLearningOutcomeCodesStr: e.currentTarget.value});
 
     handleSubmit(event: FormEvent) {
         if (this.state.currentStep === this.LastStep) {
@@ -195,13 +203,42 @@ class SyllabusCreator extends Component<SyllabusCreatorProps, SyllabusCreatorSta
                 />
             </div>;
     };
+
+    loadFinalStepForm() {
+        const termSubjectInputList = this.state.terms ? this.state.terms.map(term =>
+            <InputContainer 
+                label={"Semestr " + term.order} 
+                type="text" 
+                name="term" 
+                value={this.state.degreeCourseLearningOutcomeCodesStr}
+                onChangeValue={this.handleDegreeCourseLearningOutcomeCodesStrChange}
+            />
+        ) : '';
+        return <div className="input-step-form">
+            {termSubjectInputList}
+        </div>
+    }
     
     loadSecondStepForm() {
-        return <div className="input-step-form"></div>
+        return <div className="input-step-form">
+            <DynamicMultiLineContainer 
+                label="Zagadnienia egzaminacyjne" 
+                type="text" 
+                name="degreeCourseLearningOutcomeCodesStr" 
+                value={this.state.degreeCourseLearningOutcomeCodesStr}
+                onChangeValue={this.handleDegreeCourseLearningOutcomeCodesStrChange}
+            />
+            <InputContainer 
+                label="Kierunkowe efekty kształcenia" 
+                type="text" 
+                name="degreeCourseLearningOutcomeCodesStr" 
+                value={this.state.degreeCourseLearningOutcomeCodesStr}
+                onChangeValue={this.handleDegreeCourseLearningOutcomeCodesStrChange}
+            />
+        </div>
     }
 
     moveStepForward() {
-        console.log(this.state);
         this.setState({
             currentStep: this.state.currentStep + 1
         })
@@ -218,12 +255,12 @@ class SyllabusCreator extends Component<SyllabusCreatorProps, SyllabusCreatorSta
             buttonClass="main-btn" onClickFunc={this.moveStepForward}
         />;
 
-         if (this.state.currentStep ===this.FirstStep) {
+         if (this.state.currentStep === this.FirstStep) {
             currentStepForm = this.loadFirstStepForm()
         } else if (this.state.currentStep === 2) {
             currentStepForm = this.loadSecondStepForm()
         } else if (this.state.currentStep === this.LastStep) {
-            currentStepForm = this.loadSecondStepForm()
+            currentStepForm = this.loadFinalStepForm()
             currentBtn = <FunctionalButton name="Wyślij" buttonClass="main-btn" type="submit"/>
         }
 

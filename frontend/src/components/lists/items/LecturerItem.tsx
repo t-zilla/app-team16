@@ -10,7 +10,9 @@ type LecturerItemProps = {
 export const LecturerItem = ({lecturer}: LecturerItemProps) => {
     return (
         <li className="lecturers__lecturer-item row">
-            <div className="lecturers__lecturer-item__detail"><h5 className="label">{lecturer.name} {lecturer.surname}</h5></div>
+            <div className="lecturers__lecturer-item__detail">
+                <h5>{lecturer.name} {lecturer.surname} <span className="label">0 przedmiotów</span></h5>
+            </div>
         </li>
     );
 };
