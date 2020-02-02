@@ -95,23 +95,18 @@ docker-compose down
 
 ### Kubernetes
 
-Start cluster and registry:
+Start cluster:
 
 ```bash
-minikube start
-kubectl proxy  # in separate terminal
-docker run -d -p 5000:5000 --restart always --name registry registry:2
+minikube start --extra-config=apiserver.service-node-port-range=80-30000
 ```
 
-Obtain token for dashboard:
+Set up local registry:
 
 ```bash
-kubectl -n kube-system get secret | grep service-account-token
-kubectl -n kube-system describe secret deployment-controller-token-...
+kubectl create -f devops/prod/kubernetes/kube-registry.yaml
+kubectl port-forward --namespace kube-system $(kubectl get po -n kube-system | grep kube-registry-v0 | \awk '{print $1;}') 5000:5000  # leave running in separate terminal
 ```
-
-Open dashboard at:
-<http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/#/overview>
 
 Build images and push to registry:
 
@@ -130,5 +125,5 @@ Deploy the app:
 ```bash
 kubectl delete daemonsets,replicasets,services,deployments,pods,rc,persistentvolumeclaims --all
 kubectl apply -f devops/prod/kubernetes
-minikube service app --url
+minikube service nginx --url
 ```
