@@ -2,6 +2,7 @@ package com.psi.handler;
 
 import com.psi.syllabus.dto.SyllabusCreationDto;
 import com.psi.syllabus.dto.SyllabusDto;
+import com.psi.syllabus.repository.SyllabusSpecification;
 import com.psi.syllabus.service.SyllabusService;
 import com.psi.syllabus.translator.SyllabusTranslator;
 import lombok.RequiredArgsConstructor;
@@ -15,8 +16,8 @@ public class SyllabusHandler {
 
     private final SyllabusService syllabusService;
 
-    public List<SyllabusDto> getSyllabuses() {
-        return SyllabusTranslator.toDto(syllabusService.getSyllabuses());
+    public List<SyllabusDto> getSyllabuses(Long degreeCourseId, Long specialityId) {
+        return SyllabusTranslator.toDto(syllabusService.getSyllabuses(new SyllabusSpecification(degreeCourseId, specialityId)));
     }
 
     public SyllabusDto getSyllabus(Long id) {

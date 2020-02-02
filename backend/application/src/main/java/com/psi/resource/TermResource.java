@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -22,8 +23,8 @@ public class TermResource implements RestResource {
     private final TermHandler termHandler;
 
     @GetMapping
-    public List<TermDto> getTerms() {
-        return termHandler.getTerms();
+    public List<TermDto> getTerms(@RequestParam(value = "syllabusId", required = false) Long syllabusId) {
+        return termHandler.getTerms(syllabusId);
     }
 
     @GetMapping("/{id}")

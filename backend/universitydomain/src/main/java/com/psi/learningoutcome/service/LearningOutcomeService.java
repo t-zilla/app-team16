@@ -11,6 +11,7 @@ import com.psi.learningoutcome.repository.DegreeCourseLearningOutcomeRepository;
 import com.psi.learningoutcome.repository.MinisterialLearningOutcomeRepository;
 import com.psi.learningoutcome.repository.SubjectLearningOutcomeRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,8 +29,8 @@ public class LearningOutcomeService {
         return ministerialLearningOutcomeRepository.findAll();
     }
 
-    public List<DegreeCourseLearningOutcome> getDegreeCourseLearningOutcomes() {
-        return degreeCourseLearningOutcomeRepository.findAll();
+    public List<DegreeCourseLearningOutcome> getDegreeCourseLearningOutcomes(Specification<DegreeCourseLearningOutcome> specification) {
+        return degreeCourseLearningOutcomeRepository.findAll(specification);
     }
 
     public List<SubjectLearningOutcome> getSubjectLearningOutcomes() {

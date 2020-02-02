@@ -9,6 +9,7 @@ import com.psi.syllabus.dto.SyllabusCreationDto;
 import com.psi.syllabus.model.Syllabus;
 import com.psi.syllabus.repository.SyllabusRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,8 +23,8 @@ public class SyllabusService {
     private SpecialityService specialityService;
     private DegreeCourseService degreeCourseService;
 
-    public List<Syllabus> getSyllabuses() {
-        return syllabusRepository.findAll();
+    public List<Syllabus> getSyllabuses(Specification specification) {
+        return syllabusRepository.findAll(specification);
     }
 
     public Syllabus getSyllabus(Long id) {

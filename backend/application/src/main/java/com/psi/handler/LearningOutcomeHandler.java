@@ -6,6 +6,7 @@ import com.psi.learningoutcome.dto.MinisterialLearningOutcomeCreationDto;
 import com.psi.learningoutcome.dto.MinisterialLearningOutcomeDto;
 import com.psi.learningoutcome.dto.SubjectLearningOutcomeCreationDto;
 import com.psi.learningoutcome.dto.SubjectLearningOutcomeDto;
+import com.psi.learningoutcome.repository.DegreeCourseLearningOutcomeSpecification;
 import com.psi.learningoutcome.service.LearningOutcomeService;
 import com.psi.learningoutcome.translator.LearningOutcomeTranslator;
 import lombok.RequiredArgsConstructor;
@@ -23,8 +24,9 @@ public class LearningOutcomeHandler {
         return LearningOutcomeTranslator.toMinisterialLearningOutcomeDto(service.getMinisterialLearningOutcomes());
     }
 
-    public List<DegreeCourseLearningOutcomeDto> getDegreeCourseLearningOutcomes() {
-        return LearningOutcomeTranslator.toDegreeCourseLearningOutcomeDto(service.getDegreeCourseLearningOutcomes());
+    public List<DegreeCourseLearningOutcomeDto> getDegreeCourseLearningOutcomes(Long syllabusId) {
+        return LearningOutcomeTranslator.toDegreeCourseLearningOutcomeDto(
+                service.getDegreeCourseLearningOutcomes(new DegreeCourseLearningOutcomeSpecification(syllabusId)));
     }
 
     public List<SubjectLearningOutcomeDto> getSubjectLearningOutcomes() {

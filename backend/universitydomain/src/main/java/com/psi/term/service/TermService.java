@@ -7,6 +7,7 @@ import com.psi.term.dto.TermCreationDto;
 import com.psi.term.model.Term;
 import com.psi.term.repository.TermRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,8 +19,8 @@ public class TermService {
     private final TermRepository termRepository;
     private final SyllabusService syllabusService;
 
-    public List<Term> getTerms() {
-        return termRepository.findAll();
+    public List<Term> getTerms(Specification<Term> specification) {
+        return termRepository.findAll(specification);
     }
 
     public Term getTerm(Long id) {

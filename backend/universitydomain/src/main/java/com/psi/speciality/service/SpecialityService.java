@@ -7,6 +7,7 @@ import com.psi.speciality.dto.SpecialityCreationDto;
 import com.psi.speciality.model.Speciality;
 import com.psi.speciality.repository.SpecialityRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,8 +20,8 @@ public class SpecialityService {
     private final SpecialityRepository specialityRepository;
     private final DegreeCourseService degreeCourseService;
 
-    public List<Speciality> getSpeciality() {
-        return specialityRepository.findAll();
+    public List<Speciality> getSpecialities(Specification<Speciality> specification) {
+        return specialityRepository.findAll(specification);
     }
 
     public Speciality getSpeciality(Long id) {

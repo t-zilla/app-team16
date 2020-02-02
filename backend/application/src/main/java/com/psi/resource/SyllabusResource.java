@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -23,8 +24,9 @@ public class SyllabusResource {
     private final SyllabusHandler syllabusHandler;
 
     @GetMapping
-    public List<SyllabusDto> getSyllabuses() {
-        return syllabusHandler.getSyllabuses();
+    public List<SyllabusDto> getSyllabuses(@RequestParam(value = "degreeCourseId", required = false) Long degreeCourseId,
+                                           @RequestParam(value = "specialityId", required = false) Long specialityId) {
+        return syllabusHandler.getSyllabuses(degreeCourseId, specialityId);
     }
 
     @GetMapping("/{id}")

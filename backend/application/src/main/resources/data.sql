@@ -12,7 +12,11 @@ INSERT IGNORE INTO syllabus (id, name, study_degree, study_form, learning_profil
                     professional_title, graduation_form, graduate_silhouette, cnps_multiplier, extended_term_amount,
                     exam_issues, degree_course_id, speciality_id) VALUES
 (1, 'Program Ksztalcenia', 'FIRST_DEGREE', 'STATIONARY', 'PRACTICAL', 7, 'Wymagania wstepne', 'BACHELOR', 'Forma zaliczenia',
-'Sylwetka absolwenta', 4, false, null, 1, null);
+'Sylwetka absolwenta', 4, false, null, 1, null),
+(2, 'Program Ksztalcenia 2', 'SECOND_DEGREE', 'STATIONARY', 'PRACTICAL', 7, 'Wymagania wstepne', 'BACHELOR', 'Forma zaliczenia',
+'Sylwetka absolwenta', 4, false, null, 2, null),
+(3, 'Program Ksztalcenia 3', 'SECOND_DEGREE', 'STATIONARY', 'PRACTICAL', 7, 'Wymagania wstepne', 'BACHELOR', 'Forma zaliczenia',
+'Sylwetka absolwenta', 4, false, null, null, 1);
 
 INSERT IGNORE INTO ministerial_learning_outcome (id, symbol, description, learning_outcome_type, krk_level, learning_outcome_area) VALUES
 (1, 'MIN01', 'Ministerialny efekt ksztalcenia 1', 'SKILLS', 'LEVEL_1', 'ART_STUDIES'),

@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -19,8 +20,8 @@ public class CourseResource implements RestResource {
     private final CourseHandler courseHandler;
 
     @GetMapping
-    public List<CourseDto> getCourses() {
-        return courseHandler.getCourses();
+    public List<CourseDto> getCourses(@RequestParam(value = "subjectId", required = false) Long subjectId) {
+        return courseHandler.getCourses(subjectId);
     }
 
 }

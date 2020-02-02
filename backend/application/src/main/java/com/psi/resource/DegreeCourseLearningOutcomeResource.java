@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -23,8 +24,8 @@ public class DegreeCourseLearningOutcomeResource {
     private final LearningOutcomeHandler learningOutcomeHandler;
 
     @GetMapping
-    public List<DegreeCourseLearningOutcomeDto> getDegreeCourseLearningOutcomes() {
-        return learningOutcomeHandler.getDegreeCourseLearningOutcomes();
+    public List<DegreeCourseLearningOutcomeDto> getDegreeCourseLearningOutcomes(@RequestParam(value = "syllabusId", required = false) Long syllabusId) {
+        return learningOutcomeHandler.getDegreeCourseLearningOutcomes(syllabusId);
     }
 
     @GetMapping("/{id}")
