@@ -1,6 +1,6 @@
 import React, { Component, FormEvent } from 'react';
 import './SyllabusCreator.css';
-import { FunctionalButton } from '../ui/Button';
+import { FunctionalButton, CustomButton } from '../ui/Button';
 import { NavLink, Redirect } from "react-router-dom";
 import { LearningOutcomeType, LearningOutcomeTypeToStrMap, StringToLearningOutcomeType } from '../../models/enum-types/LearningOutcomeType';
 import SelectionInputContainer from '../ui/SelectionInputContainer';
@@ -10,6 +10,7 @@ import { LearningProfile, StringToLearningProfile } from '../../models/enum-type
 import { FormOfStudy, StringToFormOfStudy, FormOfStudyToStrMap } from '../../models/enum-types/FormOfStudy';
 import { StudyDegree, StringToStudyDegree, StudyDegreeToStrMap } from '../../models/enum-types/StudyDegree';
 import { Term } from '../../models/Term';
+import { JSXElement } from '@babel/types';
 
 type SyllabusCreatorProps = {};
 
@@ -30,11 +31,15 @@ type SyllabusCreatorState = {
     cnpsMultiplier: number | undefined;
     extendedTermAmount: boolean;
     examIssues: string[];
-    terms?: Term[]
+    terms?: Term[];
+    currentStep: number;
     toSyllabuses: boolean;
 };
 
 class SyllabusCreator extends Component<SyllabusCreatorProps, SyllabusCreatorState> { 
+    private readonly FirstStep: number = 1;
+    private readonly LastStep: number = 3;
+
     constructor(props: SyllabusCreatorProps) {
         super(props);
         this.state = {
@@ -55,6 +60,7 @@ class SyllabusCreator extends Component<SyllabusCreatorProps, SyllabusCreatorSta
             extendedTermAmount: false,
             examIssues: [],
             terms: [],
+            currentStep: this.FirstStep,
             toSyllabuses: false
         };
 
@@ -72,7 +78,7 @@ class SyllabusCreator extends Component<SyllabusCreatorProps, SyllabusCreatorSta
         this.handleZzuSumChange = this.handleZzuSumChange.bind(this);
         this.handleExtendedTermAmountChange = this.handleExtendedTermAmountChange.bind(this);
         this.handleExamIssuesChange = this.handleExamIssuesChange.bind(this);
-
+        this.moveStepForward = this.moveStepForward.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }   
 
@@ -92,10 +98,12 @@ class SyllabusCreator extends Component<SyllabusCreatorProps, SyllabusCreatorSta
     handleExamIssuesChange = (e: React.FormEvent<HTMLInputElement>) => this.setState({examIssues: e.currentTarget.value.split("\n")});
 
     handleSubmit(event: FormEvent) {
-        this.setState({toSyllabuses: true});
+        if (this.state.currentStep === this.LastStep) {
+            this.setState({toSyllabuses: true});
+        }
     }
 
-    render() {
+    loadFirstStepForm() {
         const studyDegreeOptionList = () => {
             const options = [];
             for (let [type, studyDegree] of Array.from(StudyDegreeToStrMap().entries())) {
@@ -128,8 +136,95 @@ class SyllabusCreator extends Component<SyllabusCreatorProps, SyllabusCreatorSta
             return options;
         }
 
+        return <div className="input-form-step">
+            <div className="row">
+                <InputContainer 
+                    label="Nazwa" 
+                    type="text" 
+                    name="name" 
+                    value={this.state.name}
+                    onChangeValue={this.handleNameChange}
+                />
+                <SelectionInputContainer 
+                    label="Stopień studiów" 
+                    name="studyDegree" 
+                    options={studyDegreeOptionList()}
+                    onChangeValue={this.handleStudyDegreeChange}
+                />
+                <SelectionInputContainer 
+                    label="Forma studiów" 
+                    name="studyForm" 
+                    options={studyFormOptionList()}
+                    onChangeValue={this.handleStudyFormChange}
+                />
+            </div>
+            <div className="row">
+                <SelectionInputContainer 
+                    label="Obszar kształcenia" 
+                    name="learningProfile" 
+                    options={learningProfileOptionList()}
+                    onChangeValue={this.handleLearningProfileChange}
+                />
+                <SelectionInputContainer 
+                    label="Obszar kształcenia" 
+                    name="learningProfile" 
+                    options={professionalTitleOptionList()}
+                    onChangeValue={this.handleLearningProfileChange}
+                />
+            </div>
+                <InputContainer 
+                    label="Wymagania wstępne" 
+                    type="text"
+                    name="entryRequirements" 
+                    value={this.state.entryRequirements}
+                    onChangeValue={this.handleEntryRequirementsChange}
+                />
+                <InputContainer 
+                    label="Sylwetka absolwenta" 
+                    type="text" 
+                    name="graduateSihouette" 
+                    value={this.state.graduateSihouette}
+                    onChangeValue={this.handleGraduateSihouetteChange}
+                />
+                <InputContainer 
+                    label="Forma zakończenia studiów" 
+                    type="text" 
+                    name="formOfGradution" 
+                    value={this.state.formOfGradution}
+                    onChangeValue={this.handleFormOfGradudationChange}
+                />
+            </div>;
+    };
+    
+    loadSecondStepForm() {
+        return <div className="input-step-form"></div>
+    }
+
+    moveStepForward() {
+        console.log(this.state);
+        this.setState({
+            currentStep: this.state.currentStep + 1
+        })
+    }
+
+    render() {
         if (this.state.toSyllabuses) {
             return <Redirect to="/syllabuses"/>;
+        }
+
+        let currentStepForm: JSX.Element = this.loadFirstStepForm();
+        let currentBtn: JSX.Element = <CustomButton 
+            name={"Dalej (krok " + this.state.currentStep + " z 3)"} 
+            buttonClass="main-btn" onClickFunc={this.moveStepForward}
+        />;
+
+         if (this.state.currentStep ===this.FirstStep) {
+            currentStepForm = this.loadFirstStepForm()
+        } else if (this.state.currentStep === 2) {
+            currentStepForm = this.loadSecondStepForm()
+        } else if (this.state.currentStep === this.LastStep) {
+            currentStepForm = this.loadSecondStepForm()
+            currentBtn = <FunctionalButton name="Wyślij" buttonClass="main-btn" type="submit"/>
         }
 
         return (
@@ -143,67 +238,9 @@ class SyllabusCreator extends Component<SyllabusCreatorProps, SyllabusCreatorSta
                             buttonClass="main-btn"/>  
                     </NavLink>
                 </div>
-                <NavLink to="/syllabuses">
-                    <div className="syllabus-creator__background"></div>
-                </NavLink>
                 <form className="input-form" onSubmit={this.handleSubmit}>
-                    <div className="row">
-                        <InputContainer 
-                            label="Nazwa" 
-                            type="text" 
-                            name="name" 
-                            value={this.state.name}
-                            onChangeValue={this.handleNameChange}
-                        />
-                        <SelectionInputContainer 
-                            label="Stopień studiów" 
-                            name="studyDegree" 
-                            options={studyDegreeOptionList()}
-                            onChangeValue={this.handleStudyDegreeChange}
-                        />
-                        <SelectionInputContainer 
-                            label="Forma studiów" 
-                            name="studyForm" 
-                            options={studyFormOptionList()}
-                            onChangeValue={this.handleStudyFormChange}
-                        />
-                    </div>
-                    <div className="row">
-                        <SelectionInputContainer 
-                            label="Obszar kształcenia" 
-                            name="learningProfile" 
-                            options={learningProfileOptionList()}
-                            onChangeValue={this.handleLearningProfileChange}
-                        />
-                        <SelectionInputContainer 
-                            label="Obszar kształcenia" 
-                            name="learningProfile" 
-                            options={professionalTitleOptionList()}
-                            onChangeValue={this.handleLearningProfileChange}
-                        />
-                    </div>
-                    <InputContainer 
-                        label="Wymagania wstępne" 
-                        type="text"
-                        name="entryRequirements" 
-                        value={this.state.entryRequirements}
-                        onChangeValue={this.handleEntryRequirementsChange}
-                    />
-                    <InputContainer 
-                        label="Sylwetka absolwenta" 
-                        type="text" 
-                        name="graduateSihouette" 
-                        value={this.state.graduateSihouette}
-                        onChangeValue={this.handleGraduateSihouetteChange}
-                    />
-                    <InputContainer 
-                        label="Forma zakończenia studiów" 
-                        type="text" 
-                        name="formOfGradution" 
-                        value={this.state.formOfGradution}
-                        onChangeValue={this.handleFormOfGradudationChange}
-                    />
-                    <FunctionalButton name="Dalej (krok 1 z 4)" buttonClass="main-btn" type="submit"/>
+                    {currentStepForm}
+                    {currentBtn}                    
                 </form>
             </div>
         );
