@@ -5,8 +5,11 @@ import com.psi.degreecourse.model.DegreeCourse;
 import com.psi.learningoutcome.model.DegreeCourseLearningOutcome;
 import com.psi.speciality.model.Speciality;
 import com.psi.term.model.Term;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -20,12 +23,15 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.PostLoad;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import java.util.List;
 
 @Data
 @Builder
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Entity
 @Table(name = "syllabus")
 public class Syllabus {
@@ -101,6 +107,19 @@ public class Syllabus {
 
     @Transient
     private Integer zzuSum;
+
+    @PostLoad
+    private void computeDerived() {
+        int ectsSum = 0, cnpsSum = 0, zzuSum = 0;
+        for (Term term : terms) {
+            ectsSum += term.getEctsSum();
+            cnpsSum += term.getCnpsSum();
+            zzuSum += term.getZzuSum();
+        }
+        setCnpsSum(cnpsSum);
+        setEctsSum(ectsSum);
+        setZzuSum(zzuSum);
+    }
 
 
 }

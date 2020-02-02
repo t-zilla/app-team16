@@ -26,4 +26,7 @@ public class SyllabusDto {
     private Integer cnpsMultiplier;
     private Boolean extendedTermAmount;
     private List<String> examIssues;
+    private Integer cnpsSum;
+    private Integer ectsSum;
+    private Integer zzuSum;
 }

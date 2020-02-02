@@ -69,7 +69,7 @@ public class Subject {
     private int zzuSum;
 
     @PostLoad
-    public void computeDerived() {
+    private void computeDerived() {
         int ectsSum = 0, cnpsSum = 0, zzuSum = 0;
         for (Course course : courses) {
             ectsSum += course.getEcts();

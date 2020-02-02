@@ -25,6 +25,9 @@ public class SyllabusTranslator {
                 .cnpsMultiplier(entity.getCnpsMultiplier())
                 .extendedTermAmount(entity.getExtendedTermAmount())
                 .examIssues(entity.getExamIssues())
+                .ectsSum(entity.getEctsSum())
+                .zzuSum(entity.getZzuSum())
+                .cnpsSum(entity.getCnpsSum())
                 .build();
     }
 

@@ -2,7 +2,11 @@ package com.psi.term.model;
 
 import com.psi.subjecttoterm.model.SubjectToTerm;
 import com.psi.syllabus.model.Syllabus;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,6 +22,9 @@ import javax.persistence.Transient;
 import java.util.List;
 
 @Data
+@Builder
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Entity
 @Table(name = "term")
 public class Term {
@@ -47,7 +54,7 @@ public class Term {
     private int cnpsSum;
 
     @PostLoad
-    public void computeDerived() {
+    private void computeDerived() {
         int ectsSum = 0, cnpsSum = 0, zzuSum = 0;
         for (SubjectToTerm subjectToTerm : subjectToTerms) {
             ectsSum += subjectToTerm.getSubject().getEctsSum();

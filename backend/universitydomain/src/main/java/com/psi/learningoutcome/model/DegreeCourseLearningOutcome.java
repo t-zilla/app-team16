@@ -1,6 +1,8 @@
 package com.psi.learningoutcome.model;
 
 import com.psi.syllabus.model.Syllabus;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.Entity;
@@ -14,6 +16,7 @@ import java.util.List;
 @Entity
 @Table(name = "degree_course_learning_outcome")
 @SuperBuilder
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class DegreeCourseLearningOutcome extends AbstractLearningOutcome {
 
     @ManyToMany

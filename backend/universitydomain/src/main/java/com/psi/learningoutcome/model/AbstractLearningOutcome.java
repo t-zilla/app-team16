@@ -1,6 +1,9 @@
 package com.psi.learningoutcome.model;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.Column;
@@ -14,6 +17,8 @@ import javax.persistence.MappedSuperclass;
 @Data
 @MappedSuperclass
 @SuperBuilder
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
 public abstract class AbstractLearningOutcome {
 
     @Id
