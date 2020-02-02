@@ -32,16 +32,48 @@ cn: Marek Nowak
 uid: marek
 userPassword: $2a$10$bhY3U6LEvbJ7DdWrcPqBu.vtLFPqDCgDGpTmyWrAVBcMANQzI/4Xy
 
-dn: cn=proffessors,ou=groups,dc=pwr,dc=com
+dn: uid=lech,ou=people,dc=pwr,dc=com
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: Lech Wojcik
+uid: lech
+userPassword: $2a$10$bhY3U6LEvbJ7DdWrcPqBu.vtLFPqDCgDGpTmyWrAVBcMANQzI/4Xy
+
+dn: uid=jozef,ou=people,dc=pwr,dc=com
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: Jozef Malinowski
+uid: jozef
+userPassword: $2a$10$bhY3U6LEvbJ7DdWrcPqBu.vtLFPqDCgDGpTmyWrAVBcMANQzI/4Xy
+
+dn: cn=researchers,ou=groups,dc=pwr,dc=com
 objectclass: top
 objectclass: groupOfNames
-cn: proffessors
-ou: proffessor
+cn: researchers
+ou: researcher
 member: uid=jan,ou=people,dc=pwr,dc=com
 
-dn: cn=deans,ou=groups,dc=pwr,dc=com
+dn: cn=syllabus_authors,ou=groups,dc=pwr,dc=com
 objectclass: top
 objectclass: groupOfNames
-cn: deans
-ou: dean
+cn: syllabus_authors
+ou: syllabus_author
+member: uid=lech,ou=people,dc=pwr,dc=com
+
+dn: cn=administrators,ou=groups,dc=pwr,dc=com
+objectclass: top
+objectclass: groupOfNames
+cn: administrators
+ou: administrator
 member: uid=marek,ou=people,dc=pwr,dc=com
+
+dn: cn=program_committee,ou=groups,dc=pwr,dc=com
+objectclass: top
+objectclass: groupOfNames
+cn: program_committee
+ou: program_committee
+member: uid=jozef,ou=people,dc=pwr,dc=com

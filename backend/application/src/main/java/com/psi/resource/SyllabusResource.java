@@ -4,6 +4,7 @@ import com.psi.handler.SyllabusHandler;
 import com.psi.syllabus.dto.SyllabusCreationDto;
 import com.psi.syllabus.dto.SyllabusDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,16 +35,19 @@ public class SyllabusResource {
         return syllabusHandler.getSyllabus(id);
     }
 
+    @Secured({"ROLE_SYLLABUS_AUTHOR", "ROLE_ADMINISTRATOR"})
     @PostMapping
     public SyllabusDto createSyllabus(@RequestBody SyllabusCreationDto dto) {
         return syllabusHandler.createSyllabus(dto);
     }
 
+    @Secured({"ROLE_SYLLABUS_AUTHOR", "ROLE_ADMINISTRATOR"})
     @PutMapping("/{id}")
     public SyllabusDto updateSyllabus(@PathVariable("id") Long id, @RequestBody SyllabusCreationDto dto) {
         return syllabusHandler.updateSyllabus(id, dto);
     }
 
+    @Secured({"ROLE_SYLLABUS_AUTHOR", "ROLE_ADMINISTRATOR"})
     @DeleteMapping("/{id}")
     public void removeSyllabus(@PathVariable("id") Long id) {
         syllabusHandler.removeSyllabus(id);
