@@ -15,7 +15,6 @@ public class SpecialitySpecification implements Specification<Speciality> {
     private Long degreeCourseId;
 
     public SpecialitySpecification(Long degreeCourseId) {
-        super();
         this.degreeCourseId = degreeCourseId;
     }
 

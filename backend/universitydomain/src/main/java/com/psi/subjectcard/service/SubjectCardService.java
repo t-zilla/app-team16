@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.javers.core.Javers;
 import org.javers.core.diff.Change;
 import org.javers.repository.jql.QueryBuilder;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,8 +21,8 @@ public class SubjectCardService {
     private final SubjectCardRepository repository;
     private final Javers javers;
 
-    public List<SubjectCard> getSubjectCards() {
-        return repository.findAll();
+    public List<SubjectCard> getSubjectCards(Specification<SubjectCard> specification) {
+        return repository.findAll(specification);
     }
 
     public SubjectCard getSubjectCard(Long id) {

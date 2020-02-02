@@ -1,10 +1,9 @@
 package com.psi.handler;
 
 import com.psi.subject.dto.SubjectDto;
+import com.psi.subject.repository.SubjectSpecification;
 import com.psi.subject.service.SubjectService;
 import com.psi.subject.translator.SubjectTranslator;
-import com.psi.subjectcard.dto.SubjectCardDto;
-import com.psi.subjectcard.translator.SubjectCardTranslator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -16,15 +15,12 @@ public class SubjectHandler {
 
     private final SubjectService subjectService;
 
-    public List<SubjectDto> getSubjects() {
-        return SubjectTranslator.toDto(subjectService.geSubjects());
+    public List<SubjectDto> getSubjects(Long termId) {
+        return SubjectTranslator.toDto(subjectService.geSubjects(new SubjectSpecification(termId)));
     }
 
     public SubjectDto getSubject(Long id) {
         return SubjectTranslator.toDto(subjectService.getSubject(id));
     }
 
-    public SubjectCardDto getSubjectCard(Long id) {
-        return SubjectCardTranslator.toDto(subjectService.getSubject(id).getSubjectCard());
-    }
 }

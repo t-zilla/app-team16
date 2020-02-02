@@ -15,7 +15,6 @@ public class TermSpecification implements Specification<Term> {
     private Long syllabusId;
 
     public TermSpecification(Long syllabusId) {
-        super();
         this.syllabusId = syllabusId;
     }
 

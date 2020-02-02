@@ -19,7 +19,6 @@ public class SyllabusSpecification implements Specification<Syllabus> {
     private Long specialityId;
 
     public SyllabusSpecification(Long degreeCourseId, Long specialityId) {
-        super();
         this.degreeCourseId = degreeCourseId;
         this.specialityId = specialityId;
     }

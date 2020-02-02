@@ -15,7 +15,6 @@ public class DegreeCourseLearningOutcomeSpecification implements Specification<D
     private Long syllabusId;
 
     public DegreeCourseLearningOutcomeSpecification(Long syllabusId) {
-        super();
         this.syllabusId = syllabusId;
     }
 

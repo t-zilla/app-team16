@@ -1,5 +1,6 @@
 package com.psi.handler;
 
+import com.psi.subjecttoterm.dto.SubjectToTermCreationDto;
 import com.psi.term.dto.TermCreationDto;
 import com.psi.term.dto.TermDto;
 import com.psi.term.repository.TermSpecification;
@@ -30,5 +31,13 @@ public class TermHandler {
 
     public void removeTerm(Long id) {
         termService.removeTerm(id);
+    }
+
+    public TermDto updateTerm(Long id, TermCreationDto dto) {
+        return TermTranslator.toDto(termService.updateTerm(id, dto));
+    }
+
+    public void addSubjectToTerm(Long termId, SubjectToTermCreationDto dto) {
+        termService.addSubjectToTerm(termId, dto);
     }
 }
