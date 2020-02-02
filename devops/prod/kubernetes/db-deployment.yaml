@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    service: db
+  name: db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      service: db
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        service: db
+    spec:
+      containers:
+      - env:
+        - name: MYSQL_DATABASE
+          value: psi
+        - name: MYSQL_ROOT_PASSWORD
+          value: pass
+        image: mysql:5.7
+        name: db
+        resources: {}
+        volumeMounts:
+        - mountPath: /var/lib/mysql
+          name: db-data
+      restartPolicy: Always
+      volumes:
+      - name: db-data
+        persistentVolumeClaim:
+          claimName: db-data
+status: {}

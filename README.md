@@ -128,13 +128,7 @@ docker push localhost:5000/team16-nginx
 Deploy the app:
 
 ```bash
-kubectl delete -n default deployment db
-kubectl delete -n default deployment app
-kubectl delete -n default service db
-kubectl delete -n default service app
-kubectl apply -f db-deployment.yaml
-kubectl apply -f app-deployment.yaml
-kubectl apply -f db-service.yaml
-kubectl apply -f app-service.yaml
+kubectl delete daemonsets,replicasets,services,deployments,pods,rc,persistentvolumeclaims --all
+kubectl apply -f devops/prod/kubernetes
 minikube service app --url
 ```
