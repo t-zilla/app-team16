@@ -1,6 +1,7 @@
 export enum FormOfStudy {
     Stationary,
-    Extramural
+    Extramural,
+    Undefined
 };
 
 export const StrToFormOfStudyMap = (): Map<string, FormOfStudy> => {

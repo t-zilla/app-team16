@@ -37,7 +37,7 @@ export default class SubjectPage extends Component<SubjectPageProps, SubjectPage
             <div className="subject-page">
                 <div className="row">
                     <h1 className="section-header">
-                        {this.state.subject ? this.state.subject.polishName : ''}
+                        {this.state.subject ? this.state.subject.polishName : ''} | {this.state.subject ? this.state.subject.englishName : ''}
                     </h1>    
                     <NavLink to="/syllabuses">
                     <FunctionalButton 
@@ -46,13 +46,26 @@ export default class SubjectPage extends Component<SubjectPageProps, SubjectPage
                         buttonClass="main-btn"/>  
                     </NavLink>
                 </div>
-                {this.state.subject ? this.state.subject.code : ''}
-                {this.state.subject ? this.state.subject.polishName : ''}
-                {this.state.subject ? this.state.subject.englishName : ''}
-                {this.state.subject ? this.state.subject.ectsSum : ''}
-                {this.state.subject ? this.state.subject.zzuSum : ''}
-                {this.state.subject ? this.state.subject.cnpsSum : ''}
-                {this.state.subject ? SubjectLearningAreaTypeToString(this.state.subject.learningArea) : ''}
+                <div className="row">
+                    <h4 className="syllabus-page__detail">Kod <span className="label">{this.state.subject ? this.state.subject.code : ''}</span></h4>
+                    <h4 className="syllabus-page__detail">Punkty ZZU <span className="label">{this.state.subject ? this.state.subject.zzuSum : ''}</span></h4>
+                    <h4 className="syllabus-page__detail">Punkty ECTS <span className="label">{this.state.subject ? this.state.subject.ectsSum : ''}</span></h4>
+                    <h4 className="syllabus-page__detail">Punkty CNPS <span className="label">{this.state.subject ? this.state.subject.cnpsSum : ''}</span></h4>
+                </div>
+                <div className="row">
+                    <h4 className="syllabus-page__detail">Obszar kształcenia <span className="label">{this.state.subject ? SubjectLearningAreaTypeToString(this.state.subject.learningArea) : ''}</span></h4>
+                    <h4 className="syllabus-page__detail">Prowadzący <span className="label">Brak...</span></h4>
+                    
+                </div>
+                <div className="column">
+                    <h2 className="section-sub-header">Kursy</h2>
+                    <p>Brak...</p>
+                </div>
+                <div className="column">
+                    <h2 className="section-sub-header">Karta przedmiotu</h2>
+                    <p>Brak...</p>
+                </div>
+                
             </div>
         );
     };

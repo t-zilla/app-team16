@@ -2,7 +2,8 @@ export enum StudyDegree {
     FirstDegree,
     SecondDegree,
     ThirdDegree,
-    UniformMasterDegree
+    UniformMasterDegree,
+    Undefined
 };
 
 export const StrToStudyDegreeMap = (): Map<string, StudyDegree> => {

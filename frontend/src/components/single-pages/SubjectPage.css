@@ -1,5 +1,33 @@
+.section-sub-header {
+    font-weight: 400;
+}
+
+.label {
+    font-weight: 800;
+    color: #808a96;
+    padding: 0.5em 0.5em;
+    font-size: 1em;
+    margin-left: 0.4em;
+    display: inline-block;
+}
+
+.subject-page__detail {
+    background: white;
+    font-weight: 700;
+    font-size: 0.8em;
+    padding: 0.4em 1.2em;
+    display: inline-block;
+    margin: 0.4em 0;
+    margin-right: 1.5em;
+    border-radius: 0.4em;
+    color: #808a96;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
 .subject-page {
     flex-wrap: wrap;
     list-style: none;
     flex: 8;
 };
+
+

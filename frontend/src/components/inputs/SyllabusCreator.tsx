@@ -5,14 +5,32 @@ import { NavLink, Redirect } from "react-router-dom";
 import { LearningOutcomeType, LearningOutcomeTypeToStrMap, StringToLearningOutcomeType } from '../../models/enum-types/LearningOutcomeType';
 import SelectionInputContainer from '../ui/SelectionInputContainer';
 import InputContainer from '../ui/InputContainer';
+import { ProfessionalTitle, StringToProfessionalTitle, ProfessionalTitleToStrMap } from '../../models/enum-types/ProfessionalTitle';
+import { LearningProfile, StringToLearningProfile } from '../../models/enum-types/LearningProfile';
+import { FormOfStudy, StringToFormOfStudy, FormOfStudyToStrMap } from '../../models/enum-types/FormOfStudy';
+import { StudyDegree, StringToStudyDegree, StudyDegreeToStrMap } from '../../models/enum-types/StudyDegree';
+import { Term } from '../../models/Term';
 
 type SyllabusCreatorProps = {};
 
 type SyllabusCreatorState = {
-    code: string;
-    polishName: string;
-    englishName: string;
-    learningArea: LearningOutcomeType | undefined;
+    name: string;
+    modificationDate: Date | undefined;
+    studyDegree: StudyDegree | undefined;
+    studyForm: FormOfStudy | undefined;
+    learningProfile: LearningProfile | undefined;
+    termAmount: number;
+    entryRequirements: string;
+    professionalTitle: ProfessionalTitle | undefined;
+    formOfGradution: string;
+    graduateSihouette: string;
+    cnpsSum: number | undefined;
+    ectsSum: number | undefined;
+    zzuSum: number | undefined;
+    cnpsMultiplier: number | undefined;
+    extendedTermAmount: boolean;
+    examIssues: string[];
+    terms?: Term[]
     toSyllabuses: boolean;
 };
 
@@ -20,35 +38,92 @@ class SyllabusCreator extends Component<SyllabusCreatorProps, SyllabusCreatorSta
     constructor(props: SyllabusCreatorProps) {
         super(props);
         this.state = {
-            code: '',
-            polishName: '',
-            englishName: '',
-            learningArea: LearningOutcomeType.Undefined,
+            name: '',
+            modificationDate: undefined,
+            studyDegree: StudyDegree.Undefined,
+            studyForm: FormOfStudy.Undefined,
+            learningProfile: LearningProfile.Undefined,
+            termAmount: 7,
+            entryRequirements: '',
+            professionalTitle: ProfessionalTitle.Undefined,
+            formOfGradution: '',
+            graduateSihouette: '',
+            cnpsSum: undefined,
+            ectsSum: undefined,
+            zzuSum: undefined,
+            cnpsMultiplier: undefined,
+            extendedTermAmount: false,
+            examIssues: [],
+            terms: [],
             toSyllabuses: false
         };
 
-        this.handleCodeChange = this.handleCodeChange.bind(this);
-        this.handlePolishNameChange = this.handlePolishNameChange.bind(this);
-        this.handleEnglishNameChange = this.handleEnglishNameChange.bind(this);
-        this.handleLearningAreaChange = this.handleLearningAreaChange.bind(this);
+        this.handleNameChange = this.handleNameChange.bind(this);
+        this.handleStudyDegreeChange = this.handleStudyDegreeChange.bind(this);
+        this.handleStudyFormChange = this.handleStudyFormChange.bind(this);
+        this.handleLearningProfileChange = this.handleLearningProfileChange.bind(this);
+        this.handleTermAmountChange = this.handleTermAmountChange.bind(this);
+        this.handleEntryRequirementsChange = this.handleEntryRequirementsChange.bind(this);
+        this.handleProfessionalTitleChange = this.handleProfessionalTitleChange.bind(this);
+        this.handleFormOfGradudationChange = this.handleFormOfGradudationChange.bind(this);
+        this.handleGraduateSihouetteChange = this.handleGraduateSihouetteChange.bind(this);
+        this.handleCnpsSumChange = this.handleCnpsSumChange.bind(this);
+        this.handleEctsSumChange = this.handleEctsSumChange.bind(this);
+        this.handleZzuSumChange = this.handleZzuSumChange.bind(this);
+        this.handleExtendedTermAmountChange = this.handleExtendedTermAmountChange.bind(this);
+        this.handleExamIssuesChange = this.handleExamIssuesChange.bind(this);
+
         this.handleSubmit = this.handleSubmit.bind(this);
     }   
 
-    handleCodeChange = (e: React.FormEvent<HTMLInputElement>) => this.setState({code: e.currentTarget.value});
-    handlePolishNameChange = (e: React.FormEvent<HTMLInputElement>) => this.setState({polishName: e.currentTarget.value});
-    handleEnglishNameChange = (e: React.FormEvent<HTMLInputElement>) => this.setState({englishName: e.currentTarget.value});
-    handleLearningAreaChange = (e: React.FormEvent<HTMLInputElement>) => this.setState({learningArea: StringToLearningOutcomeType(e.currentTarget.value)});
+    handleNameChange = (e: React.FormEvent<HTMLInputElement>) => this.setState({name: e.currentTarget.value});
+    handleStudyDegreeChange = (e: React.FormEvent<HTMLInputElement>) => this.setState({studyDegree: StringToStudyDegree(e.currentTarget.value)});
+    handleStudyFormChange = (e: React.FormEvent<HTMLInputElement>) => this.setState({studyForm: StringToFormOfStudy(e.currentTarget.value)});
+    handleLearningProfileChange = (e: React.FormEvent<HTMLInputElement>) => this.setState({learningProfile: StringToLearningProfile(e.currentTarget.value)});
+    handleTermAmountChange = (e: React.FormEvent<HTMLInputElement>) => this.setState({termAmount: Number.parseInt(e.currentTarget.value)});
+    handleEntryRequirementsChange = (e: React.FormEvent<HTMLInputElement>) => this.setState({entryRequirements: e.currentTarget.value});
+    handleProfessionalTitleChange = (e: React.FormEvent<HTMLInputElement>) => this.setState({professionalTitle: StringToProfessionalTitle(e.currentTarget.value)});
+    handleFormOfGradudationChange = (e: React.FormEvent<HTMLInputElement>) => this.setState({formOfGradution: e.currentTarget.value});
+    handleGraduateSihouetteChange = (e: React.FormEvent<HTMLInputElement>) => this.setState({graduateSihouette: e.currentTarget.value});
+    handleCnpsSumChange = (e: React.FormEvent<HTMLInputElement>) => this.setState({cnpsSum: Number.parseInt(e.currentTarget.value)});
+    handleEctsSumChange = (e: React.FormEvent<HTMLInputElement>) => this.setState({ectsSum: Number.parseInt(e.currentTarget.value)});
+    handleZzuSumChange = (e: React.FormEvent<HTMLInputElement>) => this.setState({zzuSum: Number.parseInt(e.currentTarget.value)});
+    handleExtendedTermAmountChange = (e: React.FormEvent<HTMLInputElement>) => this.setState({extendedTermAmount: e.currentTarget.value ? true : false});
+    handleExamIssuesChange = (e: React.FormEvent<HTMLInputElement>) => this.setState({examIssues: e.currentTarget.value.split("\n")});
 
     handleSubmit(event: FormEvent) {
-        alert(this.state.code + ", " + this.state.englishName + ", " + this.state.polishName + ", " + this.state.learningArea);
         this.setState({toSyllabuses: true});
     }
 
     render() {
-        const learningOutcomeOptionList = () => {
+        const studyDegreeOptionList = () => {
             const options = [];
-            for (let [type, outcome] of Array.from(LearningOutcomeTypeToStrMap().entries())) {
-                options.push(<option key={type} value={type}>{outcome}</option>)
+            for (let [type, studyDegree] of Array.from(StudyDegreeToStrMap().entries())) {
+                options.push(<option key={type} value={type}>{studyDegree}</option>)
+            }
+            return options;
+        }
+
+        const studyFormOptionList = () => {
+            const options = [];
+            for (let [type, formOfStudy] of Array.from(FormOfStudyToStrMap().entries())) {
+                options.push(<option key={type} value={type}>{formOfStudy}</option>)
+            }
+            return options;
+        }
+
+         const learningProfileOptionList = () => {
+            const options = [];
+            for (let [type, learningProfile] of Array.from(LearningOutcomeTypeToStrMap().entries())) {
+                options.push(<option key={type} value={type}>{learningProfile}</option>)
+            }
+            return options;
+        }
+
+        const professionalTitleOptionList = () => {
+            const options = [];
+            for (let [type, professionalTitle] of Array.from(ProfessionalTitleToStrMap().entries())) {
+                options.push(<option key={type} value={type}>{professionalTitle}</option>)
             }
             return options;
         }
@@ -59,40 +134,76 @@ class SyllabusCreator extends Component<SyllabusCreatorProps, SyllabusCreatorSta
 
         return (
             <div className="syllabus-creator">
+                <div className="row">
+                    <h1 className="section-header">Tworzenie...</h1>    
+                    <NavLink to="/syllabuses">
+                        <FunctionalButton 
+                            name="Plan kształcenia" 
+                            type="submit"
+                            buttonClass="main-btn"/>  
+                    </NavLink>
+                </div>
                 <NavLink to="/syllabuses">
                     <div className="syllabus-creator__background"></div>
                 </NavLink>
                 <form className="input-form" onSubmit={this.handleSubmit}>
                     <div className="row">
                         <InputContainer 
-                            label="Kod przedmiotu" 
+                            label="Nazwa" 
                             type="text" 
-                            name="code" 
-                            value={this.state.code}
-                            onChangeValue={this.handleCodeChange}
+                            name="name" 
+                            value={this.state.name}
+                            onChangeValue={this.handleNameChange}
+                        />
+                        <SelectionInputContainer 
+                            label="Stopień studiów" 
+                            name="studyDegree" 
+                            options={studyDegreeOptionList()}
+                            onChangeValue={this.handleStudyDegreeChange}
+                        />
+                        <SelectionInputContainer 
+                            label="Forma studiów" 
+                            name="studyForm" 
+                            options={studyFormOptionList()}
+                            onChangeValue={this.handleStudyFormChange}
+                        />
+                    </div>
+                    <div className="row">
+                        <SelectionInputContainer 
+                            label="Obszar kształcenia" 
+                            name="learningProfile" 
+                            options={learningProfileOptionList()}
+                            onChangeValue={this.handleLearningProfileChange}
                         />
                         <SelectionInputContainer 
                             label="Obszar kształcenia" 
-                            name="learningArea" 
-                            options={learningOutcomeOptionList()}
-                            onChangeValue={this.handleLearningAreaChange}
+                            name="learningProfile" 
+                            options={professionalTitleOptionList()}
+                            onChangeValue={this.handleLearningProfileChange}
                         />
                     </div>
                     <InputContainer 
-                        label="Nazwa w j. polskim" 
+                        label="Wymagania wstępne" 
                         type="text"
-                        name="polishName" 
-                        value={this.state.polishName}
-                        onChangeValue={this.handlePolishNameChange}
+                        name="entryRequirements" 
+                        value={this.state.entryRequirements}
+                        onChangeValue={this.handleEntryRequirementsChange}
                     />
                     <InputContainer 
-                        label="Nazwa w j. angielskim" 
+                        label="Sylwetka absolwenta" 
                         type="text" 
-                        name="englishName" 
-                        value={this.state.englishName}
-                        onChangeValue={this.handleEnglishNameChange}
+                        name="graduateSihouette" 
+                        value={this.state.graduateSihouette}
+                        onChangeValue={this.handleGraduateSihouetteChange}
                     />
-                    <FunctionalButton name="Zatwierdź" buttonClass="main-btn" type="submit"/>
+                    <InputContainer 
+                        label="Forma zakończenia studiów" 
+                        type="text" 
+                        name="formOfGradution" 
+                        value={this.state.formOfGradution}
+                        onChangeValue={this.handleFormOfGradudationChange}
+                    />
+                    <FunctionalButton name="Dalej (krok 1 z 4)" buttonClass="main-btn" type="submit"/>
                 </form>
             </div>
         );

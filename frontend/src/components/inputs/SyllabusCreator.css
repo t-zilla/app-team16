@@ -1,0 +1,10 @@
+.syllabus-creator .input-container {
+    margin: 0;
+}
+
+.syllabus-creator {
+    flex-wrap: wrap;
+    list-style: none;
+    flex: 8;
+}
+

@@ -1,6 +1,7 @@
 export enum LearningProfile {
     Practical,
-    General
+    General,
+    Undefined
 };
 
 export const StrToLearningProfileMap = (): Map<string, LearningProfile> => {

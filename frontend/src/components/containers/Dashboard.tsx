@@ -87,7 +87,7 @@ class Dashboard extends Component {
                             <LearningOutcomePage/>
                         </Route>
                         <Route exact path="/syllabuses/create">                
-                            
+                            <SyllabusCreator/>
                         </Route>
                     </Switch>
                     <SidePanel/>

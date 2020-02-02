@@ -1,7 +1,8 @@
 export enum ProfessionalTitle {
     Bachelor,
     Master,
-    BachelorOfEngineering
+    BachelorOfEngineering,
+    Undefined
 };
 
 export const StrToProfessionalTitleMap = (): Map<string, ProfessionalTitle> => {
