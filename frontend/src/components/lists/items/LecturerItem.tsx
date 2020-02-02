@@ -1,18 +1,16 @@
 import React from 'react';
-import LearningOutcome from '../../../models/LearningOutcome';
-import { LearningOutcomeTypeToString } from '../../../models/enum-types/LearningOutcomeType';
-import './LearningOutcomeItem.css';
+import Lecturer from '../../../models/Lecturer';
+import './LecturerItem.css';
+import { NavLink } from 'react-router-dom';
 
-type LearningOutcomeItemProps = {
-    learningOutcome: LearningOutcome;
+type LecturerItemProps = {
+    lecturer: Lecturer;
 }
 
-export const LearningOutcomeItem = ({learningOutcome}: LearningOutcomeItemProps) => {
+export const LecturerItem = ({lecturer}: LecturerItemProps) => {
     return (
-        <li className="learning-outcomes__item row">
-            <div className="learning-outcomes__item__detail"><h5 className="label">{learningOutcome.symbol}</h5></div>
-            <div className="learning-outcomes__item__detail"><h4>{LearningOutcomeTypeToString(learningOutcome.type)}</h4></div>
-            <div className="learning-outcomes__item__detail"><h4>{learningOutcome.description}</h4></div>
+        <li className="lecturers__lecturer-item row">
+            <div className="lecturers__lecturer-item__detail"><h5 className="label">{lecturer.name} {lecturer.surname}</h5></div>
         </li>
     );
 };

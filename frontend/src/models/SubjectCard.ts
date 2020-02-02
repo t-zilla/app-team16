@@ -5,6 +5,7 @@ import { PEKAchievementRating } from "./PEKAchievementRating";
 export class SubjectCard {
 
     constructor (
+        id: number,
         objectives: string[],
         entryRequirements: string[],
         teachingTools: string[],
@@ -13,6 +14,7 @@ export class SubjectCard {
         programContent: ProgramContent[],
         subject: Subject
     ) {
+        this.id = id;
         this.objectives = objectives;
         this.entryRequirements = entryRequirements;
         this.teachingTools = teachingTools;
@@ -22,6 +24,7 @@ export class SubjectCard {
         this.subject = subject;
     }
 
+    id: number;
     objectives: string[];
     entryRequirements: string[];
     teachingTools: string[];

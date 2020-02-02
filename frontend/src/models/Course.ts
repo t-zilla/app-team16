@@ -1,8 +1,9 @@
-import { CreditForm, FormOfCourse, LanguageLevel } from "./EnumerationTypes";
+import { CreditForm, FormOfCourse, LanguageLevel } from "./enum-types/EnumerationTypes";
 
 export class Course {
     
     constructor (
+        id: number,
         code: string,
         zzu: number,
         cnps: number,
@@ -12,6 +13,7 @@ export class Course {
         form: FormOfCourse,
         hoursWeekly: number
     ) {
+        this.id = id;
         this.code = code,
         this.zzu = zzu,
         this.cnps = cnps,
@@ -22,6 +24,7 @@ export class Course {
         this.hoursWeekly = hoursWeekly
     }
 
+    id: number;
     code: string;
     zzu: number;
     cnps: number;

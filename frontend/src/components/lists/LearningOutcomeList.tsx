@@ -12,7 +12,7 @@ type LearningOutcomesProps = {
 };
 
 const LearningOutcomeList = ({outcomes, outcomesName, outcomesPath} : LearningOutcomesProps) => {
-    const outcomesItemList = outcomes.map((outcome) => <LearningOutcomeItem learningOutcome={outcome}/>)
+    const outcomesItemList = outcomes.map((outcome) => <LearningOutcomeItem learningOutcome={outcome} outcomesPath={outcomesPath}/>)
     return (
         <div className="learning-outcomes">
             <div className="row">

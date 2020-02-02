@@ -3,7 +3,6 @@ export enum LanguageOfStudy {
     English
 };
 
-
 export const StrToLanguageOfStudyMap = (): Map<string, LanguageOfStudy> => {
     return new Map<string, LanguageOfStudy>()
         .set("Polski", LanguageOfStudy.Polish)

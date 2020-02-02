@@ -4,6 +4,7 @@ import { NavLink, Route } from 'react-router-dom';
 import { FunctionalButton } from '../ui/Button';
 import Syllabus from '../../models/Syllabus';
 import { SyllabusItem } from './items/SyllabusItem';
+import SyllabusCreator from '../inputs/SyllabusCreator';
 
 type SyllabusListProps = {
     syllabusList: Syllabus[];
@@ -21,9 +22,6 @@ export const SyllabusList = ({syllabusList}: SyllabusListProps) => {
                         type="submit"
                         buttonClass="main-btn"/>  
                 </NavLink>
-                <Route path="/syllabuses/create">                
-                    
-                </Route>
             </div>
             <ul className="row syllabuses-list">{syllabuses}</ul>
         </div>

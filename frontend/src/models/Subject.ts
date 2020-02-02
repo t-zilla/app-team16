@@ -1,9 +1,10 @@
-import { SubjectLearningArea } from "./EnumerationTypes";
+import { SubjectLearningArea } from "./enum-types/SubjectLearningArea";
 import { Course } from "./Course";
 import { SubjectCard } from "./SubjectCard";
 
 export default class Subject {
     constructor (
+        id: number,
         code: string, 
         polishName: string, 
         englishName: string, 
@@ -12,6 +13,7 @@ export default class Subject {
         cnpsSum: number,
         zzuSum: number
     ) {
+        this.id = id;
         this.code = code;
         this.polishName = polishName;
         this.englishName = englishName;
@@ -21,6 +23,7 @@ export default class Subject {
         this.zzuSum = zzuSum;
     }
 
+    id: number;
     code: string;
     polishName: string;
     englishName: string; 

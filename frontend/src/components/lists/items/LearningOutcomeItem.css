@@ -1,3 +1,12 @@
+.learning-outcomes__item__detail {
+    flex: 1;
+}
+
+.learning-outcomes__item__detail h4,
+.learning-outcomes__item__detail h5 {
+    margin: 0;
+}
+
 .label {
     background: #f8f8f8;
     font-weight: 700;
@@ -8,7 +17,7 @@
 }
 
 .learning-outcomes__item {
-    padding: 0.2em 2.5em;
+    padding: 0.8em 2.5em;
     margin-right: 1.5em;
     flex-grow: 1;
     border-radius: 1em;
@@ -20,5 +29,9 @@
     font-size: 400;
     display: flex;
     margin: 1.5em 0;
+    align-items: center;
 };
+
+
+
 

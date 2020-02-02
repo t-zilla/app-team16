@@ -7,17 +7,20 @@ import { LearningOutcomePage } from '../../single-pages/LearningOutcomePage';
 
 type LearningOutcomeItemProps = {
     learningOutcome: LearningOutcome;
+    outcomesPath: string;
 }
 
-export const LearningOutcomeItem = ({learningOutcome}: LearningOutcomeItemProps) => {
+export const LearningOutcomeItem = ({learningOutcome, outcomesPath}: LearningOutcomeItemProps) => {
     return (
-        <NavLink to={"/outcomes/" + learningOutcome.symbol}>
+        <NavLink to={outcomesPath + "/" + learningOutcome.id}>
         <li className="learning-outcomes__item row">
-            <div className="learning-outcomes__item__detail"><h5 className="label">{learningOutcome.symbol}</h5></div>
-            <div className="learning-outcomes__item__detail"><h4>{LearningOutcomeTypeToString(learningOutcome.type)}</h4></div>
-            <div className="learning-outcomes__item__detail"><h4>{learningOutcome.description}</h4></div>
+            <div className="learning-outcomes__item__detail"><h4>{learningOutcome.symbol}</h4></div>
+            <div className="learning-outcomes__item__detail"><h4 className="label">{LearningOutcomeTypeToString(learningOutcome.type)}</h4></div>
+            <div className="learning-outcomes__item__detail"><p><i>{learningOutcome.description}...</i></p></div>
         </li>
-        <Route path="/outcomes/:id"></Route>
+        <Route path={outcomesPath + "/:id"}>
+            <LearningOutcomePage/>
+        </Route>
         </NavLink>
     );
 };

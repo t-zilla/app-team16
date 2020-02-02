@@ -5,16 +5,6 @@ export enum LearningOutcomeArea {
     ArtStudies
 };
 
-export enum LearningProfile {
-    Practical,
-    General
-};
-
-export enum FormOfStudy {
-    Stationary,
-    Extramural
-};
-
 export enum FormOfCourse {
     Lecture,
     Excercise,
@@ -34,14 +24,6 @@ export enum LanguageLevel {
 export enum KRKLevel {
     Level_6,
     Level_8
-};
-
-export enum SubjectLearningArea {
-    ForeignLanguage,
-    PhysicalEducation,
-    Math,
-    PhysicsAndChemistry,
-    InformationTechnology
 };
 
 export enum AcademicTitle {
@@ -70,11 +52,3 @@ export enum CreditForm {
     Exam,
     Credit
 };
-
-export enum StudyDegree {
-    FirstDegree,
-    SecondDegree,
-    ThirdDegree,
-    UniformMasterDegree
-};
-
