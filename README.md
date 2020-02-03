@@ -1,5 +1,33 @@
 # psi-twwo
 
+## Non-functional requirements
+
+### B1. Tworzenie/edycja dokumentów (program kształcenia, karty przedmiotów) tylko przez uprawnione osoby
+
+* [Security config (authentication and authorization enabled)](https://github.com/pwr-twwo/app-team16/blob/master/backend/application/src/main/java/com/psi/config/SecurityConfig.java#L48)
+* [Resource config (RBAC required to create CUD resource)](https://github.com/pwr-twwo/app-team16/blob/master/backend/application/src/main/java/com/psi/resource/SyllabusResource.java#L38)
+
+### B2. Kontrola zmian (rejestracja daty, rodzaju zmiany i osoby, która ją wykonała) w planach/programach/kartach przedmiotów/planach powierzeń
+
+* [Javers repository annotation](https://github.com/pwr-twwo/app-team16/blob/master/backend/universitydomain/src/main/java/com/psi/subjectcard/repository/SubjectCardRepository.java#L8)
+* [Endpoint to fetch changes captured via Javers](https://github.com/pwr-twwo/app-team16/blob/master/backend/universitydomain/src/main/java/com/psi/subjectcard/service/SubjectCardService.java#L45)
+
+### B3. Logowanie on-site
+
+* [LDIF mock-up](https://github.com/pwr-twwo/app-team16/blob/master/backend/application/src/main/resources/localldapactivedirectory.ldif)
+
+* [LDAP connection config](https://github.com/pwr-twwo/app-team16/blob/master/backend/application/src/main/resources/application.yml#L5)
+
+* [Security config (LDAP enabled)](https://github.com/pwr-twwo/app-team16/blob/master/backend/application/src/main/java/com/psi/config/SecurityConfig.java#L62)
+
+### WS1. Wygenerowane fragmenty kodu źródłowego z modeli (ewentualnie skrypty tworzące bazę w przypadku relacyjnego modelu danych)
+
+* [Generated DDL](https://github.com/pwr-twwo/app-team16/blob/master/docs/psi.ddl)
+
+## Database schema
+
+* [Schema diagram](https://github.com/pwr-twwo/app-team16/blob/master/docs/db-schema.pdf)
+
 ## Backend
 
 ### Requirements
