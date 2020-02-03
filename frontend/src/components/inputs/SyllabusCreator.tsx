@@ -109,6 +109,7 @@ class SyllabusCreator extends Component<SyllabusCreatorProps, SyllabusCreatorSta
         if (this.state.currentStep === this.LastStep) {
             this.setState({toSyllabuses: true});
         }
+        event.preventDefault();
     }
 
     loadFirstStepForm() {

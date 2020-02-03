@@ -28,14 +28,19 @@ import FacultyPage from '../single-pages/FacultyPage';
 import LearningOutcomePage, { LearningOutcomeSource } from '../single-pages/LearningOutcomePage';
 import SyllabusCreator from '../inputs/SyllabusCreator';
 import MinisterialLearningOutcome from '../../models/MinisterialLearningOutcome';
+import Login from '../single-pages/Login';
 
 class Dashboard extends Component {
     render() {
         return (
             <Router>
+                <Switch>
+                <Route exact path="/login">
+                    <Login/>
+                </Route>
+                <Route path="/">
                 <div className="dashboard row">
                     <Menu/>
-                    <Switch>
                         <Route path={"/subjects"}>
                             <SubjectList subjectList={GetMockedSubjects()}/>
                         </Route>
@@ -102,9 +107,10 @@ class Dashboard extends Component {
                         <Route exact path="/syllabuses/create">                
                             <SyllabusCreator/>
                         </Route>
-                    </Switch>
                     <SidePanel/>
                 </div>
+                </Route>
+                </Switch>
             </Router>
         )
     }
