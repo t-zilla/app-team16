@@ -20,8 +20,8 @@ import java.util.List;
 public class SyllabusService {
 
     private final SyllabusRepository syllabusRepository;
-    private SpecialityService specialityService;
-    private DegreeCourseService degreeCourseService;
+    private final SpecialityService specialityService;
+    private final DegreeCourseService degreeCourseService;
 
     public List<Syllabus> getSyllabuses(Specification specification) {
         return syllabusRepository.findAll(specification);

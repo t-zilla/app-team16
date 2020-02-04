@@ -4,6 +4,7 @@ import com.psi.converter.StringListConverter;
 import com.psi.degreecourse.model.DegreeCourse;
 import com.psi.learningoutcome.model.DegreeCourseLearningOutcome;
 import com.psi.speciality.model.Speciality;
+import com.psi.syllabus.exception.TermsLimitException;
 import com.psi.term.model.Term;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -28,6 +29,8 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import java.util.List;
 
+import static java.text.MessageFormat.format;
+
 @Data
 @Builder
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
@@ -36,8 +39,7 @@ import java.util.List;
 @Table(name = "syllabus")
 public class Syllabus {
 
-    private static final int MAX_TERM_AMOUNT = 7;
-    private static final int MAX_EXTENDED_TERM_AMOUNT = 8;
+    private static final int MAX_TERM_AMOUNT = 8;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -119,6 +121,14 @@ public class Syllabus {
         setCnpsSum(cnpsSum);
         setEctsSum(ectsSum);
         setZzuSum(zzuSum);
+    }
+
+    public void addTerm(Term term) {
+        if (terms.size() >= MAX_TERM_AMOUNT) {
+            throw new TermsLimitException(format("Syllabus cannot have more than {0} terms.", MAX_TERM_AMOUNT));
+        } else {
+            this.terms.add(term);
+        }
     }
 
 
