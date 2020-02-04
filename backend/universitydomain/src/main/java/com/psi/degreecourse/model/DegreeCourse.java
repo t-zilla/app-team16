@@ -38,4 +38,13 @@ public class DegreeCourse {
 
     @OneToMany(mappedBy = "degreeCourse", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Syllabus> syllabuses;
+
+    @Override
+    public String toString() {
+        return "DegreeCourse{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", studyLanguage=" + studyLanguage +
+                '}';
+    }
 }

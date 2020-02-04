@@ -32,4 +32,14 @@ public abstract class AbstractLearningOutcome {
     @Enumerated(EnumType.STRING)
     @Column(name = "learning_outcome_type")
     protected LearningOutcomeType learningOutcomeType;
+
+    @Override
+    public String toString() {
+        return "AbstractLearningOutcome{" +
+                "id=" + id +
+                ", symbol='" + symbol + '\'' +
+                ", description='" + description + '\'' +
+                ", learningOutcomeType=" + learningOutcomeType +
+                '}';
+    }
 }

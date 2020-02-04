@@ -34,4 +34,14 @@ public class DegreeCourseLearningOutcome extends AbstractLearningOutcome {
     @ManyToOne
     @JoinColumn(name = "syllabus_id")
     private Syllabus syllabus;
+
+    @Override
+    public String toString() {
+        return "DegreeCourseLearningOutcome{" +
+                "id=" + id +
+                ", symbol='" + symbol + '\'' +
+                ", description='" + description + '\'' +
+                ", learningOutcomeType=" + learningOutcomeType +
+                '}';
+    }
 }

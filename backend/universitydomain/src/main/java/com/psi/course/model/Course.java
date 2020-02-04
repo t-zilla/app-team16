@@ -62,4 +62,20 @@ public class Course {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "subject_id")
     private Subject subject;
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "id=" + id +
+                ", code='" + code + '\'' +
+                ", zzu=" + zzu +
+                ", cnps=" + cnps +
+                ", ects=" + ects +
+                ", creditForm=" + creditForm +
+                ", finalCourse=" + finalCourse +
+                ", courseForm=" + courseForm +
+                ", hoursWeekly=" + hoursWeekly +
+                ", languageLevel=" + languageLevel +
+                '}';
+    }
 }

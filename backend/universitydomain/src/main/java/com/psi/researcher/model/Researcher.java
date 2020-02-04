@@ -42,4 +42,14 @@ public class Researcher {
     @OneToMany(mappedBy = "researcher", cascade = CascadeType.ALL)
     private List<Subject> subjects;
 
+    @Override
+    public String toString() {
+        return "Researcher{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", position=" + position +
+                ", academicDegree=" + academicDegree +
+                '}';
+    }
 }

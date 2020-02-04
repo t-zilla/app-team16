@@ -80,4 +80,18 @@ public class Subject {
         setEctsSum(ectsSum);
         setZzuSum(zzuSum);
     }
+
+    @Override
+    public String toString() {
+        return "Subject{" +
+                "id=" + id +
+                ", code='" + code + '\'' +
+                ", polishName='" + polishName + '\'' +
+                ", englishName='" + englishName + '\'' +
+                ", subjectLearningArea=" + subjectLearningArea +
+                ", ectsSum=" + ectsSum +
+                ", cnpsSum=" + cnpsSum +
+                ", zzuSum=" + zzuSum +
+                '}';
+    }
 }

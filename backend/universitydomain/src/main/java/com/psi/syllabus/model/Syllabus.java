@@ -140,5 +140,25 @@ public class Syllabus {
         }
     }
 
-
+    @Override
+    public String toString() {
+        return "Syllabus{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", studyDegree=" + studyDegree +
+                ", studyForm=" + studyForm +
+                ", learningProfile=" + learningProfile +
+                ", termAmount=" + termAmount +
+                ", entryRequirements='" + entryRequirements + '\'' +
+                ", professionalTitle=" + professionalTitle +
+                ", graduationForm='" + graduationForm + '\'' +
+                ", graduateSilhouette='" + graduateSilhouette + '\'' +
+                ", cnpsMultiplier=" + cnpsMultiplier +
+                ", extendedTermAmount=" + extendedTermAmount +
+                ", examIssues=" + examIssues +
+                ", cnpsSum=" + cnpsSum +
+                ", ectsSum=" + ectsSum +
+                ", zzuSum=" + zzuSum +
+                '}';
+    }
 }

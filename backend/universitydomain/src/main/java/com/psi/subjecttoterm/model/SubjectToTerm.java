@@ -40,4 +40,12 @@ public class SubjectToTerm {
 
     @Column(name = "obligatory")
     private Boolean obligatory;
+
+    @Override
+    public String toString() {
+        return "SubjectToTerm{" +
+                "id=" + id +
+                ", obligatory=" + obligatory +
+                '}';
+    }
 }

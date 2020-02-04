@@ -80,4 +80,14 @@ public class Term {
         }
     }
 
+    @Override
+    public String toString() {
+        return "Term{" +
+                "id=" + id +
+                ", allowedDeficit=" + allowedDeficit +
+                ", ectsSum=" + ectsSum +
+                ", zzuSum=" + zzuSum +
+                ", cnpsSum=" + cnpsSum +
+                '}';
+    }
 }

@@ -57,4 +57,16 @@ public class SubjectCard {
 
     @OneToMany(mappedBy = "subjectCard", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SubjectLearningOutcomeAchievement> subjectLearningOutcomeAchievements;
+
+    @Override
+    public String toString() {
+        return "SubjectCard{" +
+                "id=" + id +
+                ", objectives=" + objectives +
+                ", entryRequirements=" + entryRequirements +
+                ", teachingTools=" + teachingTools +
+                ", basicLiterature=" + basicLiterature +
+                ", supplementaryLiterature=" + supplementaryLiterature +
+                '}';
+    }
 }

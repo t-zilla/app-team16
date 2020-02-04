@@ -12,4 +12,6 @@ import javax.persistence.Table;
 @SuperBuilder
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class SubjectLearningOutcome extends AbstractLearningOutcome {
+
+
 }
