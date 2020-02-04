@@ -35,6 +35,10 @@ public class SubjectCardService {
     @Transactional
     public SubjectCard createSubjectCard(SubjectCardCreationDto dto) {
         Subject subject = subjectService.getSubject(dto.getSubjectId());
+        if (subject.getSubjectCard() != null) {
+            throw new IllegalArgumentException("Subject cannot have more than one Subject Card.");
+        }
+
         SubjectCard subjectCard = SubjectCard.builder()
                 .objectives(dto.getObjectives())
                 .basicLiterature(dto.getBasicLiterature())
