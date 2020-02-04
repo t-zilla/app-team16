@@ -5,6 +5,7 @@ import { GetMockedSubjects } from '../../mocks/MockedObjects';
 import { SubjectLearningAreaTypeToString } from '../../models/enum-types/SubjectLearningArea';
 import { FunctionalButton } from '../ui/Button';
 import { NavLink } from 'react-router-dom';
+import SubjectService from '../../services/SubjectService';
 
 type SubjectPageProps = {
     subjectId: number;
@@ -17,6 +18,7 @@ type SubjectPageState = {
 };
 
 export default class SubjectPage extends Component<SubjectPageProps, SubjectPageState> {
+    private subjectService: SubjectService;
     constructor(props: SubjectPageProps) {
         super(props);
         this.state = {
@@ -24,12 +26,19 @@ export default class SubjectPage extends Component<SubjectPageProps, SubjectPage
             isLoaded: false,
             subject: undefined
         };
+        this.subjectService = new SubjectService();
     }
 
     componentDidMount() {
-        this.setState({
-            subject: GetMockedSubjects().find(subject => subject.id === this.props.subjectId)
-        });
+        this.subjectService.get(this.props.match.params.id)
+            .then(response => {
+                console.log(response.data)
+                this.setState({
+                    subject: Subject.fromJson(response.data)
+                });
+            }).catch(error => {
+
+            });
     }
 
     render() {

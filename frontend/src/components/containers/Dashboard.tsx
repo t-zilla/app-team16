@@ -103,11 +103,9 @@ class Dashboard extends Component<DashboardProps, DashboardState> {
                         <Route exact path="/lecturers">
                             <LecturerList lecturers={GetMockedLecturers()}></LecturerList>
                         </Route>
-                        <Route path="/subject/:id">
-                            <SubjectPage subjectId={0}/>
+                        <Route path="/subject/:id" component={SubjectPage}>
                         </Route>
-                        <Route path="/syllabus/:id">
-                            <SyllabusPage syllabusId={0}/>
+                        <Route path="/syllabus/:id" component={SyllabusPage}>
                         </Route>
                         <Route path="/faculty/:id">
                             <FacultyPage facultyId={0}/>

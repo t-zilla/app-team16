@@ -7,10 +7,12 @@ import { StudyDegreeTypeToString } from '../../models/enum-types/StudyDegree';
 import { FormOfStudyTypeToString } from '../../models/enum-types/FormOfStudy';
 import './SyllabusPage.css';
 import { FunctionalButton } from '../ui/Button';
-import { NavLink } from 'react-router-dom';
+import { NavLink, match } from 'react-router-dom';
+import SyllabusService from '../../services/SyllabusService';
 
 type SyllabusPageProps = {
     syllabusId: number;
+    match: match;
 };
 
 type SyllabusPageState = {
@@ -19,20 +21,26 @@ type SyllabusPageState = {
     syllabus?: Syllabus;
 };
 
-export default class SyllabusPage extends Component<SyllabusPageProps, SyllabusPageState> {
+export default class SyllabusPage extends Component<{}, SyllabusPageState> {
+    private syllabusService: SyllabusService;
     constructor(props: SyllabusPageProps) {
         super(props);
         this.state = {
             error: false,
-            isLoaded: false,
-            syllabus: undefined
+            isLoaded: false
         };
+        this.syllabusService = new SyllabusService();
     }
 
     componentDidMount() {
-        this.setState({
-            syllabus: GetMockedSyllabuses().find(syllabus => syllabus.id === this.props.syllabusId)
-        });
+        this.syllabusService.get(this.props.match.params.id)
+            .then(response => {
+                this.setState({
+                    syllabus: Syllabus.fromJson(response.data)
+                });
+            }).catch(error => {
+
+            });
     }
 
     render() {
@@ -66,7 +74,6 @@ export default class SyllabusPage extends Component<SyllabusPageProps, SyllabusP
                 </div>
                 <div className="row">
                     <h4 className="syllabus-page__detail">Forma zakończenia studiów <span className="label">{this.state.syllabus ? this.state.syllabus.formOfGradution : ''}</span></h4>
-                    <h4 className="syllabus-page__detail">Data ostatniej modyfikacji <span className="label">{this.state.syllabus ? this.state.syllabus.modificationDate.toUTCString() : ''}</span></h4>
                 </div>
                 <div className="column">
                     <h2 className="section-sub-header">Wymaganie wstępne</h2>
@@ -74,7 +81,7 @@ export default class SyllabusPage extends Component<SyllabusPageProps, SyllabusP
                 </div>
                 <div className="column">
                     <h2 className="section-sub-header">Sylwetka absolwenta</h2>
-                    {this.state.syllabus ? this.state.syllabus.graduateSihouette : ''}
+                    {this.state.syllabus ? this.state.syllabus.graduateSilhouette : ''}
                 </div>
                 <div className="column">
                     <h2 className="section-sub-header">Zagadnienia egzaminacyjne</h2>

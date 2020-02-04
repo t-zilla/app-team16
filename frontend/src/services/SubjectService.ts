@@ -13,16 +13,6 @@ export default class SubjectService {
     }
 
     getAll() {
-        axios.interceptors.request.use(config => {
-            const token = this.authenticationService.getAccessToken();
-            if (token) {
-                config.headers['Authorization'] = `Bearer ${token}`;
-            }
-            return config;
-        }, error => {
-            Promise.reject(error);
-        });
-        
         return axios.request({
             url: this.conf.SUBJECT_URI,
             method: 'get',
@@ -31,6 +21,17 @@ export default class SubjectService {
                 'Access-Control-Allow-Origin': '*'
             },
         })
-        //return axios.get(this.conf.SYLLABUS_URI);
+    }
+
+    get(id: number) {
+        return axios.request({
+            url: `${this.conf.SUBJECT_URI}/${id}`,
+            method: 'get',
+            headers: {
+                'Authorization': 'Bearer ' + this.authenticationService.getAccessToken(),
+                'Access-Control-Allow-Origin': '*',
+                'Content-Type': 'application/json'
+            },
+        })
     }
 };

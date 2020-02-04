@@ -1,7 +1,7 @@
 import React from 'react';
 import './SyllabusItem.css';
 import Syllabus from '../../../models/Syllabus';
-import { ProfessionalTitleTypeToString } from '../../../models/enum-types/ProfessionalTitle';
+import { ProfessionalTitleTypeToString, ProfessionalTitle } from '../../../models/enum-types/ProfessionalTitle';
 import { NavLink } from 'react-router-dom';
 
 type SyllabusItemProps = {

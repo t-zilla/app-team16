@@ -9,20 +9,9 @@ export default class SyllabusService {
     constructor() {
         this.conf = new Configuration();
         this.authenticationService = new AuthenticationService(this.conf);
-        //this.authenticationService.setupInterceptor(axios);
     }
 
     getAll() {
-        axios.interceptors.request.use(config => {
-            const token = this.authenticationService.getAccessToken();
-            if (token) {
-                config.headers['Authorization'] = `Bearer ${token}`;
-            }
-            return config;
-        }, error => {
-            Promise.reject(error);
-        });
-        
         return axios.request({
             url: this.conf.SYLLABUS_URI,
             method: 'get',
@@ -32,6 +21,17 @@ export default class SyllabusService {
                 'Content-Type': 'application/json'
             },
         })
-        //return axios.get(this.conf.SYLLABUS_URI);
+    }
+
+    get(id: number) {
+        return axios.request({
+            url: `${this.conf.SYLLABUS_URI}/${id}`,
+            method: 'get',
+            headers: {
+                'Authorization': 'Bearer ' + this.authenticationService.getAccessToken(),
+                'Access-Control-Allow-Origin': '*',
+                'Content-Type': 'application/json'
+            },
+        })
     }
 };

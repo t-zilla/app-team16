@@ -7,9 +7,9 @@ export enum ProfessionalTitle {
 
 export const StrToProfessionalTitleMap = (): Map<string, ProfessionalTitle> => {
     return new Map<string, ProfessionalTitle>()
-        .set("Licencjat", ProfessionalTitle.Bachelor)
-        .set("Magister", ProfessionalTitle.Master)
-        .set("Inżynier", ProfessionalTitle.BachelorOfEngineering);
+        .set("BACHELOR", ProfessionalTitle.Bachelor)
+        .set("MASTER", ProfessionalTitle.Master)
+        .set("BACHELOR_OF_ENGINEERING", ProfessionalTitle.BachelorOfEngineering);
 };
 
 export const ProfessionalTitleToStrMap = (): Map<ProfessionalTitle, string> => {

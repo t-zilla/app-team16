@@ -8,10 +8,10 @@ export enum StudyDegree {
 
 export const StrToStudyDegreeMap = (): Map<string, StudyDegree> => {
     return new Map<string, StudyDegree>()
-        .set("Pierwszy stopień", StudyDegree.FirstDegree)
-        .set("Drugi stopień", StudyDegree.SecondDegree)
-        .set("Trzeci stopień", StudyDegree.ThirdDegree)
-        .set("Jednolite magisterskie", StudyDegree.UniformMasterDegree);
+        .set("FIRST_DEGREE", StudyDegree.FirstDegree)
+        .set("SECOND_DEGREE", StudyDegree.SecondDegree)
+        .set("THIRD DEGREE", StudyDegree.ThirdDegree)
+        .set("UNIFORM_MASTER_DEGREE", StudyDegree.UniformMasterDegree);
 };
 
 export const StudyDegreeToStrMap = (): Map<StudyDegree, string> => {

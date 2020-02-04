@@ -6,8 +6,8 @@ export enum LearningProfile {
 
 export const StrToLearningProfileMap = (): Map<string, LearningProfile> => {
     return new Map<string, LearningProfile>()
-        .set("Praktyczne", LearningProfile.Practical)
-        .set("Ogólnoakademickie", LearningProfile.General)
+        .set("PRACTICAL", LearningProfile.Practical)
+        .set("GENERAL", LearningProfile.General)
 };
 
 export const LearningProfileToStrMap = (): Map<LearningProfile, string> => {

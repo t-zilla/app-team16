@@ -108,10 +108,10 @@ const exampleSyllabusEntryRequirements: string = `Konkurs ocen ze świadectwa do
 
 export function GetMockedSyllabuses(): Syllabus[] {
     return [
-        new Syllabus(0, "W8 - Informatyka", new Date(), StudyDegree.FirstDegree, FormOfStudy.Stationary, LearningProfile.Practical, 
+        new Syllabus(0, "W8 - Informatyka", StudyDegree.FirstDegree, FormOfStudy.Stationary, LearningProfile.Practical, 
             7, exampleSyllabusEntryRequirements, ProfessionalTitle.BachelorOfEngineering, "praca dyplomowa, egzamin dyplomowy", 
             exampleSyllabusGraduateSihouette, 210, 210, 210, 1, false, exampleSyllabusExamIssues),
-        new Syllabus(1, "W4 - Informatyka", new Date(), StudyDegree.FirstDegree, FormOfStudy.Stationary, LearningProfile.Practical, 
+        new Syllabus(1, "W4 - Informatyka", StudyDegree.FirstDegree, FormOfStudy.Stationary, LearningProfile.Practical, 
             7, exampleSyllabusEntryRequirements, ProfessionalTitle.BachelorOfEngineering, "praca dyplomowa, egzamin dyplomowy", 
             exampleSyllabusGraduateSihouette, 420, 210, 210, 2, false, exampleSyllabusExamIssues)
     ];

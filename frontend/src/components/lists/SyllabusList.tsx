@@ -28,14 +28,18 @@ export class SyllabusList extends Component<SyllabusListProps, SyllabusListState
     componentDidMount() {
         this.syllabusService.getAll()
             .then(response => {
-                console.log(response);
+                this.setState({
+                    syllabuses: response.data
+                });
+                console.log(response)
+                console.log(this.state.syllabuses)
             }).catch(error => {
                 console.log(error);
             });
     }
     
     render() {
-        const syllabuses = this.state.syllabuses.map((syllabus, index) => <SyllabusItem key={index} syllabus={syllabus}/> );
+        const syllabuses = this.state.syllabuses.map((syllabus, index) => <SyllabusItem key={index} syllabus={Syllabus.fromJson(syllabus)}/> );
         return (
             <div className="syllabuses">
                 <div className="row">

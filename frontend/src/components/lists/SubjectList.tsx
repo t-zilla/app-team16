@@ -21,7 +21,7 @@ export class SubjectList extends Component<SubjectListProps, SubjectListState> {
     constructor(props: SubjectListProps) {
         super(props);
         this.state = {
-            subjects: GetMockedSubjects()
+            subjects: []
         };
         this.subjectService = new SubjectService();
     }
@@ -29,7 +29,9 @@ export class SubjectList extends Component<SubjectListProps, SubjectListState> {
     componentWillMount() {
         this.subjectService.getAll()
             .then(response => {
-                console.log(response);
+                this.setState({
+                    subjects: response.data
+                });
             })
             .catch(error => {
                 console.log(error);

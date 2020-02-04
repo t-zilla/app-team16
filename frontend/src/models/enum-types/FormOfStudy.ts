@@ -6,8 +6,8 @@ export enum FormOfStudy {
 
 export const StrToFormOfStudyMap = (): Map<string, FormOfStudy> => {
     return new Map<string, FormOfStudy>()
-        .set("Stacjonarne", FormOfStudy.Stationary)
-        .set("Niestacjonarne", FormOfStudy.Extramural)
+        .set("STATIONARY", FormOfStudy.Stationary)
+        .set("EXTRAMURAL", FormOfStudy.Extramural)
 };
 
 export const FormOfStudyToStrMap = (): Map<FormOfStudy, string> => {

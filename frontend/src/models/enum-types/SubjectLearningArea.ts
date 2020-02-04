@@ -8,11 +8,11 @@ export enum SubjectLearningArea {
 
 export const StrToSubjectLearningAreaMap = (): Map<string, SubjectLearningArea> => {
     return new Map<string, SubjectLearningArea>()
-        .set("Język obcy", SubjectLearningArea.ForeignLanguage)
-        .set("Wychowanie fizyczne", SubjectLearningArea.PhysicalEducation)
-        .set("Matematyka", SubjectLearningArea.Math)
-        .set("Fizyka i chemia", SubjectLearningArea.PhysicsAndChemistry)
-        .set("Technologia informacyjne", SubjectLearningArea.InformationTechnology);
+        .set("FOREIGN_LANGUAGE", SubjectLearningArea.ForeignLanguage)
+        .set("PHYSICAL_EDUCATION", SubjectLearningArea.PhysicalEducation)
+        .set("MATH", SubjectLearningArea.Math)
+        .set("PHYSICS_AND_CHEMISTRY", SubjectLearningArea.PhysicsAndChemistry)
+        .set("INFORMATION_TECHNOLOGY", SubjectLearningArea.InformationTechnology);
 };
 
 export const SubjectLearningAreaToStrMap = (): Map<SubjectLearningArea, string> => {

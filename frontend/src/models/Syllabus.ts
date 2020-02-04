@@ -1,7 +1,7 @@
-import { LearningProfile } from "./enum-types/LearningProfile";
-import { FormOfStudy } from './enum-types/FormOfStudy';
-import { StudyDegree } from './enum-types/StudyDegree';
-import { ProfessionalTitle } from './enum-types/ProfessionalTitle';
+import { LearningProfile, StringToLearningProfile } from "./enum-types/LearningProfile";
+import { FormOfStudy, StringToFormOfStudy } from './enum-types/FormOfStudy';
+import { StudyDegree, StringToStudyDegree } from './enum-types/StudyDegree';
+import { ProfessionalTitle, StringToProfessionalTitle } from './enum-types/ProfessionalTitle';
 import { Term } from "./Term";
 
 export default class Syllabus {
@@ -12,7 +12,6 @@ export default class Syllabus {
     constructor (
         id: number,
         name: string,
-        modificationDate: Date,
         studyDegree: StudyDegree,
         studyForm: FormOfStudy,
         learningProfile: LearningProfile,
@@ -20,7 +19,7 @@ export default class Syllabus {
         entryRequirements: string,
         professionalTitle: ProfessionalTitle,
         formOfGradution: string,
-        graduateSihouette: string,
+        graduateSilhouette: string,
         cnpsSum: number,
         ectsSum: number,
         zzuSum: number,
@@ -30,7 +29,6 @@ export default class Syllabus {
     ) {
         this.id = id;
         this.name = name;
-        this.modificationDate = modificationDate;
         this.studyDegree = studyDegree;
         this.studyForm = studyForm;
         this.learningProfile = learningProfile;
@@ -38,7 +36,7 @@ export default class Syllabus {
         this.entryRequirements = entryRequirements;
         this.professionalTitle = professionalTitle;
         this.formOfGradution = formOfGradution;
-        this.graduateSihouette = graduateSihouette;
+        this.graduateSilhouette = graduateSilhouette;
         this.cnpsSum = cnpsSum;
         this.ectsSum = ectsSum;
         this.zzuSum = zzuSum;
@@ -49,15 +47,14 @@ export default class Syllabus {
     
     id: number;
     name: string;
-    modificationDate: Date;
-    studyDegree: StudyDegree
+    studyDegree: StudyDegree;
     studyForm: FormOfStudy;
     learningProfile: LearningProfile;
     termAmount: number;
     entryRequirements: string;
     professionalTitle: ProfessionalTitle;
     formOfGradution: string;
-    graduateSihouette: string;
+    graduateSilhouette: string;
     cnpsSum: number;
     ectsSum: number;
     zzuSum: number;
@@ -65,5 +62,33 @@ export default class Syllabus {
     extendedTermAmount: boolean;
     examIssues: string[];
     terms?: Term[]
+
+    static capitalize(s: string) {
+        console.log(s.charAt(0).toUpperCase() + s.slice(1).toLowerCase());
+        return s.charAt(0).toUpperCase() + s.slice(1).toLowerCase();
+    };
+
+    static fromJson(json: any): Syllabus {
+        console.log(json)
+        return new Syllabus(
+            json.id,
+            json.name,
+            StringToStudyDegree(json.studyDegree),
+            StringToFormOfStudy(json.studyForm),
+            StringToLearningProfile(json.learningProfile),
+            json.termAmount,
+            json.entryRequirements,
+            StringToProfessionalTitle(json.professionalTitle),
+            json.formOfGradution,
+            json.graduateSilhouette,
+            json.cnpsSum,
+            json.ectsSum,
+            json.zzuSum,
+            json.cnpsMultiplier,
+            json.extendedTermAmount,
+            json.examIssues
+        );
+    }
 };
+
 

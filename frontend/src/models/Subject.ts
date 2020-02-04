@@ -1,4 +1,4 @@
-import { SubjectLearningArea } from "./enum-types/SubjectLearningArea";
+import { SubjectLearningArea, StringToSubjectLearningArea } from "./enum-types/SubjectLearningArea";
 import { Course } from "./Course";
 import { SubjectCard } from "./SubjectCard";
 
@@ -33,4 +33,17 @@ export default class Subject {
     zzuSum: number;
     subjectCard?: SubjectCard;
     courses?: Course[];
+
+    static fromJson(json: any) {
+        return new Subject(
+            json.id,
+            json.code,
+            json.polishName,
+            json.englishName,
+            StringToSubjectLearningArea(json.subjectLearningArea),
+            json.ectsSum,
+            json.cnpsSum,
+            json.zzuSum
+        );
+    }
 };
