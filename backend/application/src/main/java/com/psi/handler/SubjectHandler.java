@@ -23,4 +23,7 @@ public class SubjectHandler {
         return SubjectTranslator.toDto(subjectService.getSubject(id));
     }
 
+    public SubjectDto assignResearcherToSubject(Long subjectId, Long researcherId) {
+        return SubjectTranslator.toDto(subjectService.assignResearcherToSubject(subjectId, researcherId));
+    }
 }

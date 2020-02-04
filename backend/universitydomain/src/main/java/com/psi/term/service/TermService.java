@@ -54,7 +54,7 @@ public class TermService {
         term.setAllowedDeficit(dto.getAllowedDeficit());
         term.setSyllabus(syllabus);
 
-        return termRepository.save(term);
+        return term;
     }
 
     @Transactional

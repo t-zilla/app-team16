@@ -4,6 +4,7 @@ import com.psi.handler.SyllabusHandler;
 import com.psi.syllabus.dto.SyllabusCreationDto;
 import com.psi.syllabus.dto.SyllabusDto;
 import lombok.RequiredArgsConstructor;
+import org.javers.core.diff.Change;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -51,6 +52,11 @@ public class SyllabusResource {
     @DeleteMapping("/{id}")
     public void removeSyllabus(@PathVariable("id") Long id) {
         syllabusHandler.removeSyllabus(id);
+    }
+
+    @GetMapping("/audit")
+    public List<Change> getSyllabusesChanges() {
+        return syllabusHandler.getSyllabusesChanges();
     }
 
 }

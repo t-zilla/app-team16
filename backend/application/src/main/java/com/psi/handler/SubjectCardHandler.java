@@ -15,18 +15,18 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SubjectCardHandler {
 
-    private final SubjectCardService service;
+    private final SubjectCardService subjectCardService;
 
     public List<SubjectCardDto> getSubjectCards(Long subjectId) {
-        return SubjectCardTranslator.toDto(service.getSubjectCards(new SubjectCardSpecification(subjectId)));
+        return SubjectCardTranslator.toDto(subjectCardService.getSubjectCards(new SubjectCardSpecification(subjectId)));
     }
 
     public SubjectCardDto updateSubjectCard(Long id, SubjectCardCreationDto dto) {
-        return SubjectCardTranslator.toDto(service.updateSubjectCard(id, dto));
+        return SubjectCardTranslator.toDto(subjectCardService.updateSubjectCard(id, dto));
     }
 
     public List<Change> getSubjectCardsChanges() {
-        return service.getSubjectCardsChanges();
+        return subjectCardService.getSubjectCardsChanges();
     }
 
 }

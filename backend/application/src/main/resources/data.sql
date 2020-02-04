@@ -43,11 +43,13 @@ INSERT IGNORE INTO degree_course_lo_to_subject_lo (degree_course_learning_outcom
 (1, 1);
 
 INSERT IGNORE INTO researcher (id, first_name, last_name, position, academic_degree) VALUES
-(1, 'Marek', 'Nowak', 'LECTURER', 'DOCTOR');
+(1, 'Marek', 'Nowak', 'LECTURER', 'DOCTOR'),
+(2, 'Lukasz', 'Kubacki', 'LECTURER', 'DOCTOR'),
+(3, 'Tadeusz', 'Drozd', 'LECTURER', 'DOCTOR');
 
 INSERT IGNORE INTO subject (id, code, polish_name, english_name, subject_learning_area, researcher_id) VALUES
 (1, 'C1', 'Bazy danych', 'Databases', 'INFORMATION_TECHNOLOGY', 1),
-(2, 'C2', 'ASK', 'ASK', 'INFORMATION_TECHNOLOGY', 1);
+(2, 'C2', 'ASK', 'ASK', 'INFORMATION_TECHNOLOGY', null);
 
 INSERT IGNORE INTO subject_card (id, objectives, entry_requirements, teaching_tools, basic_literature, supplementary_literature, subject_id) VALUES
 (1, 'Cel przedmiotu 1,Cel przedmiotu 2', 'Wymaganie wstepne 1,Wymaganie wstepne 2','Narzędzie dydaktyczne 1,Narzedzie dydaktyczne 2',

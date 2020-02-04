@@ -2,13 +2,16 @@ package com.psi.syllabus.service;
 
 import com.psi.common.CommonUtil;
 import com.psi.degreecourse.model.DegreeCourse;
-import com.psi.degreecourse.service.DegreeCourseService;
+import com.psi.degreecourse.repository.DegreeCourseRepository;
 import com.psi.speciality.model.Speciality;
-import com.psi.speciality.service.SpecialityService;
+import com.psi.speciality.repository.SpecialityRepository;
 import com.psi.syllabus.dto.SyllabusCreationDto;
 import com.psi.syllabus.model.Syllabus;
 import com.psi.syllabus.repository.SyllabusRepository;
 import lombok.RequiredArgsConstructor;
+import org.javers.core.Javers;
+import org.javers.core.diff.Change;
+import org.javers.repository.jql.QueryBuilder;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,10 +23,11 @@ import java.util.List;
 public class SyllabusService {
 
     private final SyllabusRepository syllabusRepository;
-    private final SpecialityService specialityService;
-    private final DegreeCourseService degreeCourseService;
+    private final SpecialityRepository specialityRepository;
+    private final DegreeCourseRepository degreeCourseRepository;
+    private final Javers javers;
 
-    public List<Syllabus> getSyllabuses(Specification specification) {
+    public List<Syllabus> getSyllabuses(Specification<Syllabus> specification) {
         return syllabusRepository.findAll(specification);
     }
 
@@ -32,9 +36,12 @@ public class SyllabusService {
     }
 
     public Syllabus createSyllabus(SyllabusCreationDto dto) {
-        DegreeCourse degreeCourse = degreeCourseService.getDegreeCourse(dto.getDegreeCurseId());
-        Speciality speciality = specialityService.getSpeciality(dto.getSpecialityId());
-
+        DegreeCourse degreeCourse = dto.getDegreeCurseId() != null ?
+                degreeCourseRepository.findById(dto.getDegreeCurseId()).orElse(null) :
+                null;
+        Speciality speciality = dto.getSpecialityId() != null ?
+                specialityRepository.findById(dto.getSpecialityId()).orElse(null) :
+                null;
         Syllabus syllabus = Syllabus.builder()
                 .name(dto.getName())
                 .studyDegree(dto.getStudyDegree())
@@ -57,8 +64,12 @@ public class SyllabusService {
 
     @Transactional
     public Syllabus updateSyllabus(Long id, SyllabusCreationDto dto) {
-        DegreeCourse degreeCourse = degreeCourseService.getDegreeCourse(dto.getDegreeCurseId());
-        Speciality speciality = specialityService.getSpeciality(dto.getSpecialityId());
+        DegreeCourse degreeCourse = dto.getDegreeCurseId() != null ?
+                degreeCourseRepository.findById(dto.getDegreeCurseId()).orElse(null) :
+                null;
+        Speciality speciality = dto.getSpecialityId() != null ?
+                specialityRepository.findById(dto.getSpecialityId()).orElse(null) :
+                null;
         Syllabus syllabus = getSyllabus(id);
         syllabus.setName(dto.getName());
         syllabus.setStudyDegree(dto.getStudyDegree());
@@ -82,5 +93,9 @@ public class SyllabusService {
     public void removeSyllabus(Long id) {
         Syllabus syllabus = getSyllabus(id);
         syllabusRepository.delete(syllabus);
+    }
+
+    public List<Change> getSyllabusesChanges() {
+        return javers.findChanges(QueryBuilder.byClass(Syllabus.class).build());
     }
 }

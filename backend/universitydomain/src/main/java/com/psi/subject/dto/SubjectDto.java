@@ -1,5 +1,6 @@
 package com.psi.subject.dto;
 
+import com.psi.researcher.dto.ResearcherDto;
 import com.psi.subject.model.SubjectLearningArea;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,4 +17,5 @@ public class SubjectDto {
     private int ectsSum;
     private int cnpsSum;
     private int zzuSum;
+    private ResearcherDto researcher;
 }

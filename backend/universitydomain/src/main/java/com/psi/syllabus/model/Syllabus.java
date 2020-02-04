@@ -4,6 +4,7 @@ import com.psi.converter.StringListConverter;
 import com.psi.degreecourse.model.DegreeCourse;
 import com.psi.learningoutcome.model.DegreeCourseLearningOutcome;
 import com.psi.speciality.model.Speciality;
+import com.psi.syllabus.exception.SyllabusAssignmentException;
 import com.psi.syllabus.exception.TermsLimitException;
 import com.psi.term.model.Term;
 import lombok.AccessLevel;
@@ -25,6 +26,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PostLoad;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import java.util.List;
@@ -121,6 +123,13 @@ public class Syllabus {
         setCnpsSum(cnpsSum);
         setEctsSum(ectsSum);
         setZzuSum(zzuSum);
+    }
+
+    @PrePersist
+    private void validateAssignment() {
+        if (degreeCourse != null && speciality != null) {
+            throw new SyllabusAssignmentException("Syllabus cannot be assign to Degree Course and Speciality at the same time.");
+        }
     }
 
     public void addTerm(Term term) {
