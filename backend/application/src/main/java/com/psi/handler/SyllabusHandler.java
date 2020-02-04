@@ -6,6 +6,7 @@ import com.psi.syllabus.repository.SyllabusSpecification;
 import com.psi.syllabus.service.SyllabusService;
 import com.psi.syllabus.translator.SyllabusTranslator;
 import lombok.RequiredArgsConstructor;
+import org.javers.core.diff.Change;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -36,4 +37,7 @@ public class SyllabusHandler {
         syllabusService.removeSyllabus(id);
     }
 
+    public List<Change> getSyllabusesChanges() {
+        return syllabusService.getSyllabusesChanges();
+    }
 }

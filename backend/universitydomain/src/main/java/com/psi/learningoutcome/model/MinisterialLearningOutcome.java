@@ -27,4 +27,16 @@ public class MinisterialLearningOutcome extends AbstractLearningOutcome {
     @Enumerated(EnumType.STRING)
     @Column(name = "learning_outcome_area")
     private LearningOutcomeArea learningOutcomeArea;
+
+    @Override
+    public String toString() {
+        return "MinisterialLearningOutcome{" +
+                "krkLevel=" + krkLevel +
+                ", learningOutcomeArea=" + learningOutcomeArea +
+                ", id=" + id +
+                ", symbol='" + symbol + '\'' +
+                ", description='" + description + '\'' +
+                ", learningOutcomeType=" + learningOutcomeType +
+                '}';
+    }
 }

@@ -42,4 +42,14 @@ public class ProgramContent {
     @JoinColumn(name = "subject_card_id")
     private SubjectCard subjectCard;
 
+    @Override
+    public String toString() {
+        return "ProgramContent{" +
+                "id=" + id +
+                ", lp=" + lp +
+                ", courseForm=" + courseForm +
+                ", content='" + content + '\'' +
+                ", hoursAmount=" + hoursAmount +
+                '}';
+    }
 }

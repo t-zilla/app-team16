@@ -14,6 +14,7 @@ import com.itextpdf.kernel.font.PdfFontFactory;
 import com.psi.subjectcard.model.SubjectCard;
 import com.psi.subject.model.Subject;
 import com.psi.subject.model.SubjectLearningArea;
+import com.psi.researcher.model.*;
 import com.psi.learningoutcome.model.*;
 import com.psi.programcontent.model.*;
 import org.slf4j.Logger;
@@ -63,7 +64,7 @@ public class SubjectCardPdfGenerator {
 
             // document.add(new Paragraph("PRZEDMIOTOWE EFEKTY UCZENIA SIĘ").setFontSize(14));
             // for (SubjectLearningOutcomeAchievement outcome : subjectCard.getSubjectLearningOutcomeAchievements()) {
-            //     document.add(new Paragraph(outcome.toString()));
+            //     document.add(new Paragraph(outcome.getSymbol() + " " + outcome.getDescription()));
             // }
 
             i = 1;
@@ -88,8 +89,16 @@ public class SubjectCardPdfGenerator {
             }
 
             document.add(new Paragraph(new Text("OPIEKUN PRZEDMIOTU").setFontSize(14)));
-            if (subject.getResearcher() != null) {
-                document.add(new Paragraph(subject.getResearcher().toString()));
+            Researcher researcher = subject.getResearcher();
+
+            if (researcher != null) {
+                String prefix = "";
+
+                if (researcher.getAcademicDegree() == AcademicDegree.DOCTOR) {
+                    prefix = "Dr ";
+                }
+
+                document.add(new Paragraph(prefix + researcher.getFirstName() + ' ' + researcher.getLastName()));
             } else {
                 document.add(new Paragraph("brak"));
             }

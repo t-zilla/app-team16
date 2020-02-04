@@ -42,4 +42,12 @@ public class Speciality {
 
     @OneToMany(mappedBy = "speciality", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Syllabus> syllabuses;
+
+    @Override
+    public String toString() {
+        return "Speciality{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

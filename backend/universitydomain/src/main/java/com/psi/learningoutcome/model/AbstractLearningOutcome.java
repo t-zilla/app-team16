@@ -33,7 +33,13 @@ public abstract class AbstractLearningOutcome {
     @Column(name = "learning_outcome_type")
     protected LearningOutcomeType learningOutcomeType;
 
+    @Override
     public String toString() {
-        return symbol + " " + description;
+        return "AbstractLearningOutcome{" +
+                "id=" + id +
+                ", symbol='" + symbol + '\'' +
+                ", description='" + description + '\'' +
+                ", learningOutcomeType=" + learningOutcomeType +
+                '}';
     }
 }

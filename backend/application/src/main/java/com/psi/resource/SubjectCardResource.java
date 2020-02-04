@@ -31,29 +31,29 @@ import static java.text.MessageFormat.format;
 @RequiredArgsConstructor
 public class SubjectCardResource implements RestResource {
 
-    private final SubjectCardHandler handler;
+    private final SubjectCardHandler subjectCardHandler;
 
     @GetMapping
     public List<SubjectCardDto> getSubjectCards(@RequestParam(value = "subjectId", required = false) Long subjectId) {
         log.info(format("[{0}] requested Subject Cards list", getCurrentUsername()));
 
-        return handler.getSubjectCards(subjectId);
+        return subjectCardHandler.getSubjectCards(subjectId);
     }
 
     @PutMapping("/{id}")
     public SubjectCardDto updateSubjectCard(@PathVariable("id") Long id,
                                             @RequestBody SubjectCardCreationDto dto) {
-        return handler.updateSubjectCard(id, dto);
+        return subjectCardHandler.updateSubjectCard(id, dto);
     }
 
     @GetMapping("/audit")
     public List<Change> getSubjectCardsChanges() {
-        return handler.getSubjectCardsChanges();
+        return subjectCardHandler.getSubjectCardsChanges();
     }
 
     @GetMapping(value = "/{id}/pdf")
     public ResponseEntity<InputStreamResource> getPdf(@PathVariable("id") Long id) {
-        SubjectCard subjectCard = handler.getSubjectCard(id);
+        SubjectCard subjectCard = subjectCardHandler.getSubjectCard(id);
 
         ByteArrayInputStream bis = SubjectCardPdfGenerator.generate(subjectCard);
 

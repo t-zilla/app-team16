@@ -35,12 +35,14 @@ public class TermService {
         return termRepository.findById(id).orElseThrow(CommonUtil.noEntityFoundById(id, Term.class));
     }
 
+    @Transactional
     public Term createTerm(TermCreationDto dto) {
         Syllabus syllabus = syllabusService.getSyllabus(dto.getSyllabusId());
         Term term = Term.builder()
                 .allowedDeficit(dto.getAllowedDeficit())
                 .syllabus(syllabus)
                 .build();
+        syllabus.addTerm(term);
 
         return termRepository.save(term);
     }
@@ -52,7 +54,7 @@ public class TermService {
         term.setAllowedDeficit(dto.getAllowedDeficit());
         term.setSyllabus(syllabus);
 
-        return termRepository.save(term);
+        return term;
     }
 
     @Transactional
@@ -71,7 +73,7 @@ public class TermService {
                     .term(term)
                     .obligatory(dto.getObligatory())
                     .build();
-            subjectToTermRepository.save(subjectToTerm);
+            term.addSubject(subjectToTerm);
         }
     }
 }

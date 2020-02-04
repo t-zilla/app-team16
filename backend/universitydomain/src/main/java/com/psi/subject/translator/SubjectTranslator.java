@@ -1,5 +1,7 @@
 package com.psi.subject.translator;
 
+import com.psi.researcher.dto.ResearcherDto;
+import com.psi.researcher.translator.ResearcherTranslator;
 import com.psi.subject.dto.SubjectDto;
 import com.psi.subject.model.Subject;
 import lombok.experimental.UtilityClass;
@@ -11,6 +13,8 @@ import java.util.stream.Collectors;
 public class SubjectTranslator {
 
     public SubjectDto toDto(Subject entity) {
+        ResearcherDto researcher = entity.getResearcher() != null ? ResearcherTranslator.toDto(entity.getResearcher()) : null;
+
         return SubjectDto.builder()
                 .id(entity.getId())
                 .code(entity.getCode())
@@ -20,6 +24,7 @@ public class SubjectTranslator {
                 .ectsSum(entity.getEctsSum())
                 .cnpsSum(entity.getCnpsSum())
                 .zzuSum(entity.getZzuSum())
+                .researcher(researcher)
                 .build();
     }
 
