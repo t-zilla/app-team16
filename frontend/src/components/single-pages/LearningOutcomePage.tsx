@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import LearningOutcome from '../../models/LearningOutcome';
-import { GetMockedFaculties, GetMockedMinisterialLearningOutcomes, GetMockedDegreeCourseLearningOutcomes, GetMockedSubjectLearningOutcomes } from '../../mocks/MockedObjects';
+import { GetMockedMinisterialLearningOutcomes, GetMockedDegreeCourseLearningOutcomes, GetMockedSubjectLearningOutcomes } from '../../mocks/MockedObjects';
 import { FunctionalButton } from '../ui/Button';
 import { NavLink } from 'react-router-dom';
-import { LanguageOfStudyTypeToString } from '../../models/enum-types/LanguageOfStudy';
 import './LearningOutcomePage.css';
 import { LearningOutcomeTypeToString } from '../../models/enum-types/LearningOutcomeType';
-import DegreeCourseLearningOutcome from '../../models/DegreeCourseLearningOutcome';
 
 export enum LearningOutcomeSource {
     Ministerial,

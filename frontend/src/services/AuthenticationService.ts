@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosStatic } from 'axios';
 import Configuration from '../configuration/Configuration';
 import Token from '../models/authentication/Token';
 
@@ -12,14 +12,30 @@ export default class AuthenticationService {
 
     setAccessToken(token: Token) {
         localStorage.setItem(this.ACCESS_TOKEN_KEY, token.accessToken);
-        localStorage.setItem(this.ACCESS_TOKEN_TYPE_KEY, token.accessToken);
+        localStorage.setItem(this.ACCESS_TOKEN_TYPE_KEY, token.tokenType);
     }
 
-    getAccessToken = () => localStorage.getItem(this.ACCESS_TOKEN_TYPE_KEY);
+    getAccessToken = () => localStorage.getItem(this.ACCESS_TOKEN_KEY);
 
     getAccessTokenType = () => localStorage.getItem(this.ACCESS_TOKEN_TYPE_KEY);
 
-    isAuthenticated = () => this.getAccessToken() && this.getAccessTokenType();
+    isAuthenticated() {
+        return axios.post(this.conf.VALIDATE_URI, {
+            token: this.getAccessToken()
+        });
+    }
+
+    setupInterceptor(axios: AxiosStatic) {
+        axios.interceptors.request.use(config => {
+            const token = this.getAccessToken();
+            if (token) {
+                config.headers['Authorization'] = `Bearer ${token}`;
+            }
+            return config;
+        }, error => {
+            Promise.reject(error);
+        });
+    }
 
     login(username: string, password: string) {
         return axios.request<Token>({

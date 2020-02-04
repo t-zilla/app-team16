@@ -4,7 +4,7 @@ import { FunctionalButton } from '../ui/Button';
 import AuthenticationService from '../../services/AuthenticationService';
 import Configuration from '../../configuration/Configuration';
 import './Login.css'
-import Token from '../../models/authentication/Token';
+import { Redirect } from 'react-router-dom';
 
 type LoginProps = {
 
@@ -13,9 +13,9 @@ type LoginProps = {
 type LoginState = {
     username: string;
     password: string;
+    authenticated: boolean;
+    authenticationChecked: boolean;
 };
-
-const loginService = new AuthenticationService(new Configuration());
 
 class Login extends Component<LoginProps, LoginState> {
     private authenticationService: AuthenticationService;
@@ -26,13 +26,24 @@ class Login extends Component<LoginProps, LoginState> {
         super(props);
         this.state = {
             username: '',
-            password: ''
+            password: '',
+            authenticated: false,
+            authenticationChecked: false
         };
+
         this.authenticationService = new AuthenticationService(new Configuration());
-        
         this.handlePasswordChange = this.handlePasswordChange.bind(this);
         this.handleUsernameChange = this.handleUsernameChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.authenticationService.isAuthenticated()
+            .then(response => {
+                this.setState({
+                    authenticated: response.data.success,
+                    authenticationChecked: true
+                })
+            }).catch(error => {
+                
+            });
     }
 
     handleUsernameChange = (e: React.FormEvent<HTMLInputElement>) => this.setState({username: e.currentTarget.value});
@@ -43,7 +54,10 @@ class Login extends Component<LoginProps, LoginState> {
             .login(this.state.username, this.state.password)
             .then(response => {
                 this.authenticationService.setAccessToken(response.data);
-
+                this.setState({
+                    authenticationChecked: true,
+                    authenticated: this.authenticationService.getAccessToken() !== ''
+                });
             }).catch(error => {
                 console.log(error);
             })
@@ -51,7 +65,10 @@ class Login extends Component<LoginProps, LoginState> {
     }
 
     render() {
-        //if (this.authenticationService.isAuthenticated())
+        if (this.state.authenticationChecked && this.state.authenticated) {
+            return <Redirect to="/"/>
+        }
+
         return (
             <div className="login-page column">
                 <h2 className="section-header">Witaj w systemie zarządzania planami kształcenia</h2>

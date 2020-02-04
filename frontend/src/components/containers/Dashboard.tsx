@@ -12,9 +12,10 @@ import {
 import './Dashboard.css';
 import { SubjectList } from '../lists/SubjectList';
 import {
-    BrowserRouter as Router,
     Switch,
-    Route
+    Route,
+    Redirect,
+    BrowserRouter as Router
   } from "react-router-dom";
 import SidePanel from '../ui/SidePanel';
 import LearningOutcomeList from '../lists/LearningOutcomeList';
@@ -22,22 +23,47 @@ import { SyllabusList } from '../lists/SyllabusList';
 import { FacultyList } from '../lists/FacultyList';
 import { LecturerList } from '../lists/LecturerList';
 import SyllabusPage from '../single-pages/SyllabusPage';
-import SubjectCreator from '../inputs/SubjectCreator';
 import SubjectPage from '../single-pages/SubjectPage';
 import FacultyPage from '../single-pages/FacultyPage';
 import LearningOutcomePage, { LearningOutcomeSource } from '../single-pages/LearningOutcomePage';
 import SyllabusCreator from '../inputs/SyllabusCreator';
-import MinisterialLearningOutcome from '../../models/MinisterialLearningOutcome';
 import Login from '../single-pages/Login';
+import AuthenticationService from '../../services/AuthenticationService';
+import Configuration from '../../configuration/Configuration';
 
-class Dashboard extends Component {
+type DashboardProps = {};
+
+type DashboardState = {
+    authenticated: boolean;
+    authenticationChecked: boolean;
+}
+
+class Dashboard extends Component<DashboardProps, DashboardState> {
+    private authenticationService: AuthenticationService;
+    constructor(props: DashboardProps) {
+        super(props);
+        this.state = {
+            authenticated: false,
+            authenticationChecked: false
+        };
+        this.authenticationService = new AuthenticationService(new Configuration());
+        this.authenticationService.isAuthenticated()
+            .then(response => {
+                this.setState({
+                    authenticated: response.data.success,
+                    authenticationChecked: true
+                })
+            }).catch(error => {
+                
+            });
+    }
+
     render() {
+        if (this.state.authenticationChecked && !this.state.authenticated) {
+            return <Redirect to="/login"/>
+        }
+        
         return (
-            <Router>
-                <Switch>
-                <Route exact path="/login">
-                    <Login/>
-                </Route>
                 <Route path="/">
                 <div className="dashboard row">
                     <Menu/>
@@ -110,8 +136,6 @@ class Dashboard extends Component {
                     <SidePanel/>
                 </div>
                 </Route>
-                </Switch>
-            </Router>
         )
     }
 };

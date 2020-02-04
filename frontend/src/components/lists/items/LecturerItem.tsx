@@ -1,7 +1,6 @@
 import React from 'react';
 import Lecturer from '../../../models/Lecturer';
 import './LecturerItem.css';
-import { NavLink } from 'react-router-dom';
 
 type LecturerItemProps = {
     lecturer: Lecturer;
