@@ -42,4 +42,14 @@ public class Researcher {
     @OneToMany(mappedBy = "researcher", cascade = CascadeType.ALL)
     private List<Subject> subjects;
 
+    public String toString() {
+        String prefix = "";
+
+        if (academicDegree == AcademicDegree.DOCTOR) {
+            prefix = "Dr ";
+        }
+
+        return prefix + firstName + ' ' + lastName;
+    }
+
 }

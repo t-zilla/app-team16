@@ -32,4 +32,8 @@ public abstract class AbstractLearningOutcome {
     @Enumerated(EnumType.STRING)
     @Column(name = "learning_outcome_type")
     protected LearningOutcomeType learningOutcomeType;
+
+    public String toString() {
+        return symbol + " " + description;
+    }
 }

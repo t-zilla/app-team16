@@ -8,6 +8,7 @@ import com.psi.subjectcard.translator.SubjectCardTranslator;
 import lombok.RequiredArgsConstructor;
 import org.javers.core.diff.Change;
 import org.springframework.stereotype.Component;
+import com.psi.subjectcard.model.SubjectCard;
 
 import java.util.List;
 
@@ -29,4 +30,8 @@ public class SubjectCardHandler {
         return service.getSubjectCardsChanges();
     }
 
+    public SubjectCard getSubjectCard(Long id) {
+        return service.getSubjectCard(id);
+    }
+    
 }

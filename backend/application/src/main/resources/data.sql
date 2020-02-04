@@ -66,6 +66,4 @@ INSERT IGNORE INTO subject_to_term (id, subject_id, term_id, obligatory) VALUES
 (1, 1, 1, true);
 
 INSERT IGNORE INTO subject_learning_outcome_achievement (id, description, achievement_type, subject_card_id, subject_learning_outcome_id) VALUES
-(1, 'Opis', 'FORMING', 1, 1);
-
-
+(1, 'Opis', 'SUMMARY_FORMING', 1, 1);
