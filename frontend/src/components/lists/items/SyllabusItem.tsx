@@ -2,7 +2,7 @@ import React from 'react';
 import './SyllabusItem.css';
 import Syllabus from '../../../models/Syllabus';
 import { ProfessionalTitleTypeToString } from '../../../models/enum-types/ProfessionalTitle';
-import { NavLink, Route, Switch } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 type SyllabusItemProps = {
     syllabus: Syllabus;

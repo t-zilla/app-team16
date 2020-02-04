@@ -2,7 +2,7 @@ import React, { Component, FormEvent } from 'react';
 import './SyllabusCreator.css';
 import { FunctionalButton, CustomButton } from '../ui/Button';
 import { NavLink, Redirect } from "react-router-dom";
-import { LearningOutcomeType, LearningOutcomeTypeToStrMap, StringToLearningOutcomeType } from '../../models/enum-types/LearningOutcomeType';
+import { LearningOutcomeTypeToStrMap } from '../../models/enum-types/LearningOutcomeType';
 import SelectionInputContainer from '../ui/SelectionInputContainer';
 import InputContainer from '../ui/InputContainer';
 import { ProfessionalTitle, StringToProfessionalTitle, ProfessionalTitleToStrMap } from '../../models/enum-types/ProfessionalTitle';
@@ -10,8 +10,6 @@ import { LearningProfile, StringToLearningProfile } from '../../models/enum-type
 import { FormOfStudy, StringToFormOfStudy, FormOfStudyToStrMap } from '../../models/enum-types/FormOfStudy';
 import { StudyDegree, StringToStudyDegree, StudyDegreeToStrMap } from '../../models/enum-types/StudyDegree';
 import { Term } from '../../models/Term';
-import { JSXElement } from '@babel/types';
-import DegreeCourseLearningOutcome from '../../models/DegreeCourseLearningOutcome';
 import DynamicMultiLineContainer from '../ui/DynamicMultiLineContainer';
 
 type SyllabusCreatorProps = {};

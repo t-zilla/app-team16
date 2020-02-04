@@ -2,8 +2,7 @@ import React from 'react';
 import './FacultyItem.css';
 import Faculty from '../../../models/Faculty';
 import { LanguageOfStudyTypeToString } from '../../../models/enum-types/LanguageOfStudy'
-import { NavLink, Route } from 'react-router-dom';
-import FacultyPage from '../../single-pages/FacultyPage';
+import { NavLink } from 'react-router-dom';
 
 type FacultyItemProps = {
     faculty: Faculty;

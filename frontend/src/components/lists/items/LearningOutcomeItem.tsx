@@ -2,8 +2,7 @@ import React from 'react';
 import LearningOutcome from '../../../models/LearningOutcome';
 import { LearningOutcomeTypeToString } from '../../../models/enum-types/LearningOutcomeType';
 import './LearningOutcomeItem.css';
-import { NavLink, Route } from 'react-router-dom';
-import LearningOutcomePage from '../../single-pages/LearningOutcomePage';
+import { NavLink } from 'react-router-dom';
 
 type LearningOutcomeItemProps = {
     learningOutcome: LearningOutcome;

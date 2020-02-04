@@ -1,7 +1,7 @@
 import React from 'react';
 import './SubjectItem.css';
 import Subject from '../../../models/Subject';
-import { NavLink, Route } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 type SubjectItemProps = {
     subject: Subject;
