@@ -4,7 +4,11 @@ import com.psi.converter.StringListConverter;
 import com.psi.learningoutcome.model.SubjectLearningOutcomeAchievement;
 import com.psi.programcontent.model.ProgramContent;
 import com.psi.subject.model.Subject;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -20,6 +24,9 @@ import javax.persistence.Table;
 import java.util.List;
 
 @Data
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@Builder
 @Entity
 @Table(name = "subject_card")
 public class SubjectCard {
