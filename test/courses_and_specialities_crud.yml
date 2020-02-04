@@ -1,0 +1,116 @@
+---
+- config:
+    - testset: "CRUD test for degree courses and specialities"
+# Now unauthenticated
+- test:
+    - name: "Get degree courses without token"
+    - url: "/api/degree-courses"
+    - expected_status: [400, 403]
+- test:
+    - name: "Get degree courses with invalid token"
+    - url: "/api/degree-courses"
+    - headers: {template: {Content-Type: application/json, Authorization: "Bearer NOTAVALIDTOKEN"}}
+    - expected_status: [400, 403]
+- test:
+    - name: "Create degree course without token"
+    - url: "/api/degree-courses"
+    - method: "POST"
+    - body: '{
+        "name": "Information Technology",
+        "studyLanguage": "ENGLISH"
+        }'
+    - expected_status: [400, 403]
+- test:
+    - name: "Get token with incorrect credentials"
+    - url: "/api/auth/generate-token"
+    - method: "POST"
+    - body: '{"username": "marek", "password": "secrett"}'
+    - headers: {Content-Type: application/json}
+    - expected_status: [400, 403]
+- test:
+    - name: "Get token with correct credentials"
+    - url: "/api/auth/generate-token"
+    - method: "POST"
+    - body: '{"username": "marek", "password": "secret"}'
+    - headers: {Content-Type: application/json}
+    - expected_status: [200]
+    - extract_binds:
+        - 'token': {'jsonpath_mini': 'accessToken'}
+# Now authenticated
+- test:
+    - name: "Get degree courses authenticated"
+    - url: "/api/degree-courses"
+    - headers: {template: {Content-Type: application/json, Authorization: "Bearer $token"}}
+    - expected_status: [200]
+- test:
+    - name: "Get specialities authenticated"
+    - url: "/api/specialities"
+    - headers: {template: {Content-Type: application/json, Authorization: "Bearer $token"}}
+    - expected_status: [200]
+- test:
+    - name: "Create degree course"
+    - url: "/api/degree-courses"
+    - method: "POST"
+    - body: '{
+        "name": "Information Technology",
+        "studyLanguage": "ENGLISH"
+      }'
+    - headers: {template: {Content-Type: application/json, Authorization: "Bearer $token"}}
+    - expected_status: [200]
+    - extract_binds:
+        - 'degreeCourseId': {'jsonpath_mini': 'id'}
+# Now course exists
+- test:
+    - name: "Get created degree course"
+    - url: {'template': "/api/degree-courses/$degreeCourseId"}
+    - headers: {template: {Content-Type: application/json, Authorization: "Bearer $token"}}
+    - expected_status: [200]
+    - validators:
+        - compare: {jsonpath_mini: 'id', comparator: 'str_eq', expected: {template: '$degreeCourseId'}}
+        - compare: {jsonpath_mini: 'name', comparator: 'str_eq', expected: 'Information Technology'}
+        - compare: {jsonpath_mini: 'studyLanguage', comparator: 'str_eq', expected: 'ENGLISH'}
+- test:
+    - name: "Get non-existent degree course"
+    - url: {'template': "/api/degree-courses/11226668"}
+    - headers: {template: {Content-Type: application/json, Authorization: "Bearer $token"}}
+    - expected_status: [400, 404]
+- test:
+    - name: "Add speciality to degree course"
+    - url: '/api/specialities'
+    - method: 'POST'
+    - body: { template: '{"degreeCourseId": $degreeCourseId, "name": "Software Engineering" }' }
+    - headers: {template: {Content-Type: application/json, Authorization: "Bearer $token"}}
+    - expected_status: [200]
+    - extract_binds:
+        - 'specialityId': {'jsonpath_mini': 'id'}
+# Now speciality exists
+- test:
+    - name: "Get created degree course"
+    - url: {'template': "/api/specialities/$specialityId"}
+    - headers: {template: {Content-Type: application/json, Authorization: "Bearer $token"}}
+    - expected_status: [200]
+    - validators:
+        - compare: {jsonpath_mini: 'id', comparator: 'str_eq', expected: {template: '$specialityId'}}
+        - compare: {jsonpath_mini: 'name', comparator: 'str_eq', expected: 'Software Engineering'}
+- test:
+    - name: "Get non-existent speciality"
+    - url: {'template': "/api/specialities/11226668"}
+    - headers: {template: {Content-Type: application/json, Authorization: "Bearer $token"}}
+    - expected_status: [400, 404]
+- test:
+    - name: "Add delete degree course"
+    - url: {'template': "/api/degree-courses/$degreeCourseId"}
+    - method: 'DELETE'
+    - headers: {template: {Content-Type: application/json, Authorization: "Bearer $token"}}
+    - expected_status: [200]
+# Now course doesn't exist and speciality doesn't exist (cascade delete)
+- test:
+    - name: "Get deleted degree course"
+    - url: {'template': "/api/degree-courses/$degreeCourseId"}
+    - headers: {template: {Content-Type: application/json, Authorization: "Bearer $token"}}
+    - expected_status: [400, 404]
+- test:
+    - name: "Get speciality deleted via cascade"
+    - url: {'template': "/api/specialities/$specialityId"}
+    - headers: {template: {Content-Type: application/json, Authorization: "Bearer $token"}}
+    - expected_status: [400, 404]

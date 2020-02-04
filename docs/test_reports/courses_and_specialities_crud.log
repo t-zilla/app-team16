@@ -1,0 +1,17 @@
+{"timestamp":"2020-02-04T10:46:51.190+0000","status":403,"error":"Forbidden","message":"Access Denied","path":"/api/degree-courses"}
+
+{"timestamp":"2020-02-04T10:46:51.199+0000","status":403,"error":"Forbidden","message":"Access Denied","path":"/api/degree-courses"}
+{"success":false,"message":"Sorry, You're not authorized to access this resource."}
+{"accessToken":"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYXJlayIsInNjb3BlcyI6IlJPTEVfQURNSU5JU1RSQVRPUiIsImlhdCI6MTU4MDgxMzIxMSwiZXhwIjoxNTgwODE2ODExfQ.sjNKOcpS7eai-DPwSYtosQi67E9bxqWhN6JGQqJ552AENTOkWmo-OUakxu4FdMVczgOgzsw1Cq2k9QIgC_90eg","tokenType":"Bearer"}
+[{"id":1,"name":"Informatyka Stosowana","studyLanguage":"POLISH"},{"id":2,"name":"Zarz?dzanie","studyLanguage":"POLISH"},{"id":3,"name":"In?ynieria systemów","studyLanguage":"POLISH"},{"id":4,"name":"Computer science","studyLanguage":"ENGLISH"},{"id":14,"name":"Information Technology","studyLanguage":"ENGLISH"},{"id":15,"name":"Information Technology","studyLanguage":"ENGLISH"},{"id":16,"name":"Information Technology","studyLanguage":"ENGLISH"},{"id":17,"name":"Information Technology","studyLanguage":"ENGLISH"},{"id":18,"name":"Information Technology","studyLanguage":"ENGLISH"},{"id":19,"name":"Information Technology","studyLanguage":"ENGLISH"},{"id":20,"name":"Information Technology","studyLanguage":"ENGLISH"}]
+[{"id":1,"name":"In?ynieria oprogramowania"},{"id":2,"name":"Danologia"},{"id":3,"name":"Software Engineering"}]
+{"id":25,"name":"Information Technology","studyLanguage":"ENGLISH"}
+{"id":25,"name":"Information Technology","studyLanguage":"ENGLISH"}
+No Entity: com.psi.degreecourse.model.DegreeCourse found with id: 11,226,668
+{"id":8,"name":"Software Engineering"}
+{"id":8,"name":"Software Engineering"}
+No Entity: com.psi.speciality.model.Speciality found with id: 11,226,668
+
+No Entity: com.psi.degreecourse.model.DegreeCourse found with id: 25
+No Entity: com.psi.speciality.model.Speciality found with id: 8
+Test Group Default SUCCEEDED: : 16/16 Tests Passed!

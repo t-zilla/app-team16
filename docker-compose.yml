@@ -41,7 +41,11 @@ services:
             - backend
             - frontend
         restart: unless-stopped
-
+    api-tester:
+        image: thoom/pyresttest
+        volumes:
+            - ./test:/test
+        restart: 'no'
 volumes:
     db-data:
     nginx-logs:

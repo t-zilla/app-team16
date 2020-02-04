@@ -6,6 +6,7 @@
 
 * [Security config (authentication and authorization enabled)](https://github.com/pwr-twwo/app-team16/blob/master/backend/application/src/main/java/com/psi/config/SecurityConfig.java#L48)
 * [Resource config (RBAC required to create CUD resource)](https://github.com/pwr-twwo/app-team16/blob/master/backend/application/src/main/java/com/psi/resource/SyllabusResource.java#L38)
+* [Test specification](https://github.com/pwr-twwo/app-team16/blob/master/test/courses_and_specialities_crud.yml)
 
 ### B2. Kontrola zmian (rejestracja daty, rodzaju zmiany i osoby, która ją wykonała) w planach/programach/kartach przedmiotów/planach powierzeń
 
@@ -20,6 +21,8 @@
 
 * [Security config (LDAP enabled)](https://github.com/pwr-twwo/app-team16/blob/master/backend/application/src/main/java/com/psi/config/SecurityConfig.java#L62)
 
+* [Test specification](https://github.com/pwr-twwo/app-team16/blob/master/test/courses_and_specialities_crud.yml)
+
 ### WS1. Wygenerowane fragmenty kodu źródłowego z modeli (ewentualnie skrypty tworzące bazę w przypadku relacyjnego modelu danych)
 
 * [Generated DDL](https://github.com/pwr-twwo/app-team16/blob/master/docs/psi.ddl)
@@ -27,6 +30,18 @@
 ## Database schema
 
 * [Schema diagram](https://github.com/pwr-twwo/app-team16/blob/master/docs/db-schema.pdf)
+
+## Testing
+
+Run API tests:
+
+```bash
+docker-compose run api-tester http://nginx /test/courses_and_specialities_crud.yml --print-bodies=true
+```
+
+* [Test specification](https://github.com/pwr-twwo/app-team16/blob/master/test/courses_and_specialities_crud.yml)
+
+* [Test report](https://github.com/pwr-twwo/app-team16/blob/master/docs/test_reports/courses_and_specialities_crud.log)
 
 ## Backend
 
