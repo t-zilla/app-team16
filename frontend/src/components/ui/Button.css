@@ -47,3 +47,8 @@
 .main-btn:active {
     transform: scale(0.99);
 }
+
+.logout-btn {
+    display: flex;
+    align-items: center;
+}

@@ -16,8 +16,10 @@ export default class AuthenticationService {
     }
 
     getAccessToken = () => localStorage.getItem(this.ACCESS_TOKEN_KEY);
-
     getAccessTokenType = () => localStorage.getItem(this.ACCESS_TOKEN_TYPE_KEY);
+
+    removeAccessToken = () => localStorage.removeItem(this.ACCESS_TOKEN_KEY);
+    removeAccessTokenType = () => localStorage.removeItem(this.ACCESS_TOKEN_TYPE_KEY);
 
     isAuthenticated() {
         return axios.post(this.conf.VALIDATE_URI, {
@@ -55,5 +57,10 @@ export default class AuthenticationService {
                 password: password
             },
         });
+    }
+
+    logout() {
+        this.removeAccessToken();
+        this.removeAccessTokenType();
     }
 };
