@@ -12,4 +12,5 @@ public class SubjectCardCreationDto {
     private List<String> teachingTools;
     private List<String> basicLiterature;
     private List<String> supplementaryLiterature;
+    private Long subjectId;
 }
