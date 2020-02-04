@@ -60,7 +60,7 @@ INSERT IGNORE INTO program_content (id, lp, course_form, content, hours_amount, 
 
 INSERT IGNORE INTO course (id, code, zzu, cnps, ects, credit_form, final_course, course_form, hours_weekly, language_level, leading_course_id, subject_id) VALUES
 (1, 'c1', 90, 200, 4, 'EXAM', false, 'LECTURE', 15, null, null, 1),
-(2, 'c12', 90, 200, 4, 'EXAM', false, 'PROJECT', 15, null, 1, 1),
+(2, 'c12', 60, 120, 4, 'EXAM', false, 'PROJECT', 15, null, 1, 1),
 (3, 'KILLER EXAM', 370, 999, 100, 'EXAM', false, 'LECTURE', 15, null, null, 2);
 
 INSERT IGNORE INTO term (id, allowed_deficit, syllabus_id) VALUES
@@ -71,5 +71,3 @@ INSERT IGNORE INTO subject_to_term (id, subject_id, term_id, obligatory) VALUES
 
 INSERT IGNORE INTO subject_learning_outcome_achievement (id, description, achievement_type, subject_card_id, subject_learning_outcome_id) VALUES
 (1, 'Opis', 'SUMMARY_FORMING', 1, 1);
-
-

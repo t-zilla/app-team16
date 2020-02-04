@@ -13,7 +13,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import com.psi.subjectcard.model.SubjectCard;
+import com.psi.pdf.SubjectCardPdfGenerator;
 
+import java.io.ByteArrayInputStream;
 import java.util.List;
 
 import static java.text.MessageFormat.format;
@@ -44,4 +51,19 @@ public class SubjectCardResource implements RestResource {
         return subjectCardHandler.getSubjectCardsChanges();
     }
 
+    @GetMapping(value = "/{id}/pdf")
+    public ResponseEntity<InputStreamResource> getPdf(@PathVariable("id") Long id) {
+        SubjectCard subjectCard = subjectCardHandler.getSubjectCard(id);
+
+        ByteArrayInputStream bis = SubjectCardPdfGenerator.generate(subjectCard);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Disposition", "inline; filename=subjectcard.pdf");
+
+        return ResponseEntity
+                .ok()
+                .headers(headers)
+                .contentType(MediaType.APPLICATION_PDF)
+                .body(new InputStreamResource(bis));
+    }
 }
