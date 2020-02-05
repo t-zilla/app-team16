@@ -3,10 +3,6 @@
     - testset: "CRUD test for degree courses and specialities"
 # Now unauthenticated
 - test:
-    - name: "Get degree courses without token"
-    - url: "/api/degree-courses"
-    - expected_status: [400, 403]
-- test:
     - name: "Get degree courses with invalid token"
     - url: "/api/degree-courses"
     - headers: {template: {Content-Type: application/json, Authorization: "Bearer NOTAVALIDTOKEN"}}
@@ -19,7 +15,7 @@
         "name": "Information Technology",
         "studyLanguage": "ENGLISH"
         }'
-    - expected_status: [400, 403]
+    - expected_status: [400, 403, 415]
 - test:
     - name: "Get token with incorrect credentials"
     - url: "/api/auth/generate-token"

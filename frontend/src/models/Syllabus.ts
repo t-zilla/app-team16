@@ -71,7 +71,7 @@ export default class Syllabus {
     static toJson(syllabus: Syllabus): any {
         return {
             cnpsMultiplier: syllabus.cnpsMultiplier,
-            degreeCurseId: syllabus.studyDegree,
+            degreeCourseId: 1,
             entryRequirements: syllabus.entryRequirements,
             examIssues: syllabus.examIssues,
             extendedTermAmount: syllabus.extendedTermAmount,
@@ -80,7 +80,6 @@ export default class Syllabus {
             learningProfile: syllabus.learningProfile,
             name: syllabus.name,
             professionalTitle: syllabus.professionalTitle,
-            specialityId: 0,
             studyDegree: syllabus.studyDegree,
             studyForm: syllabus.studyForm,
             termAmount: syllabus.termAmount
