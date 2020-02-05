@@ -73,7 +73,7 @@ export default class SyllabusPage extends Component<{}, SyllabusPageState> {
                     <h4 className="syllabus-page__detail">Forma studiów <span className="label">{this.state.syllabus ? FormOfStudyTypeToString(this.state.syllabus.studyForm) : ''}</span></h4>
                 </div>
                 <div className="row">
-                    <h4 className="syllabus-page__detail">Forma zakończenia studiów <span className="label">{this.state.syllabus ? this.state.syllabus.formOfGradution : ''}</span></h4>
+                    <h4 className="syllabus-page__detail">Forma zakończenia studiów <span className="label">{this.state.syllabus ? this.state.syllabus.graduationForm : ''}</span></h4>
                 </div>
                 <div className="column">
                     <h2 className="section-sub-header">Wymaganie wstępne</h2>

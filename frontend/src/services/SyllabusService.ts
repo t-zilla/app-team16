@@ -1,6 +1,7 @@
 import axios from 'axios';
 import Configuration from '../configuration/Configuration';
 import AuthenticationService from './AuthenticationService';
+import Syllabus from '../models/Syllabus';
 
 export default class SyllabusService {
     private conf: Configuration;
@@ -27,6 +28,19 @@ export default class SyllabusService {
         return axios.request({
             url: `${this.conf.SYLLABUS_URI}/${id}`,
             method: 'get',
+            headers: {
+                'Authorization': 'Bearer ' + this.authenticationService.getAccessToken(),
+                'Access-Control-Allow-Origin': '*',
+                'Content-Type': 'application/json'
+            },
+        })
+    }
+
+    create(syllabus: Syllabus) {
+        return axios.request({
+            url: this.conf.SYLLABUS_URI,
+            method: 'post',
+            data: JSON.stringify(Syllabus.toJson(syllabus)),
             headers: {
                 'Authorization': 'Bearer ' + this.authenticationService.getAccessToken(),
                 'Access-Control-Allow-Origin': '*',

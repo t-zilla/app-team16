@@ -18,12 +18,12 @@ class DynamicMultiLineContainer extends Component<DynamicMultiLineContainerProps
         return (
             <div className="input-container">
                 <label>{this.props.label}</label>
-                <input 
-                    type={this.props.type} 
+                <textarea
                     name={this.props.name} 
                     value={this.props.value}
                     onChange={this.props.onChangeValue}
-                />
+                ></textarea>
+                
             </div>
         )
     };

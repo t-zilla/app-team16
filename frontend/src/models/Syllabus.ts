@@ -1,8 +1,8 @@
-import { LearningProfile, StringToLearningProfile } from "./enum-types/LearningProfile";
+import { LearningProfile, StringToLearningProfile } from './enum-types/LearningProfile';
 import { FormOfStudy, StringToFormOfStudy } from './enum-types/FormOfStudy';
 import { StudyDegree, StringToStudyDegree } from './enum-types/StudyDegree';
 import { ProfessionalTitle, StringToProfessionalTitle } from './enum-types/ProfessionalTitle';
-import { Term } from "./Term";
+import { Term } from './Term';
 
 export default class Syllabus {
 
@@ -67,6 +67,25 @@ export default class Syllabus {
         console.log(s.charAt(0).toUpperCase() + s.slice(1).toLowerCase());
         return s.charAt(0).toUpperCase() + s.slice(1).toLowerCase();
     };
+    
+    static toJson(syllabus: Syllabus): any {
+        return {
+            cnpsMultiplier: syllabus.cnpsMultiplier,
+            degreeCurseId: syllabus.studyDegree,
+            entryRequirements: syllabus.entryRequirements,
+            examIssues: syllabus.examIssues,
+            extendedTermAmount: syllabus.extendedTermAmount,
+            graduateSilhouette: syllabus.graduateSilhouette,
+            graduationForm: syllabus.formOfGradution,
+            learningProfile: syllabus.learningProfile,
+            name: syllabus.name,
+            professionalTitle: syllabus.professionalTitle,
+            specialityId: 0,
+            studyDegree: syllabus.studyDegree,
+            studyForm: syllabus.studyForm,
+            termAmount: syllabus.termAmount
+        }   
+    }
 
     static fromJson(json: any): Syllabus {
         console.log(json)

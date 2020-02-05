@@ -11,26 +11,28 @@ import { FormOfStudy, StringToFormOfStudy, FormOfStudyToStrMap } from '../../mod
 import { StudyDegree, StringToStudyDegree, StudyDegreeToStrMap } from '../../models/enum-types/StudyDegree';
 import { Term } from '../../models/Term';
 import DynamicMultiLineContainer from '../ui/DynamicMultiLineContainer';
+import SyllabusService from '../../services/SyllabusService';
+import Syllabus from '../../models/Syllabus';
 
 type SyllabusCreatorProps = {};
 
 type SyllabusCreatorState = {
     name: string;
-    modificationDate: Date | undefined;
     studyDegree: StudyDegree | undefined;
     studyForm: FormOfStudy | undefined;
     learningProfile: LearningProfile | undefined;
     termAmount: number;
     entryRequirements: string;
     professionalTitle: ProfessionalTitle | undefined;
-    formOfGradution: string;
-    graduateSihouette: string;
+    graduationForm: string;
+    graduateSilhouette: string;
     cnpsSum: number | undefined;
     ectsSum: number | undefined;
     zzuSum: number | undefined;
     cnpsMultiplier: number | undefined;
     extendedTermAmount: boolean;
     examIssues: string[];
+    examIssuesStr: string;
     terms?: Term[];
     degreeCourseLearningOutcomeCodes?: string[];
     degreeCourseLearningOutcomeCodesStr: string,
@@ -40,35 +42,35 @@ type SyllabusCreatorState = {
 
 class SyllabusCreator extends Component<SyllabusCreatorProps, SyllabusCreatorState> { 
     private readonly FirstStep: number = 1;
-    private readonly LastStep: number = 3;
+    private readonly LastStep: number = 2;
     private readonly StringArrayDelimeter: string = '\n';
-
+    private syllabusService: SyllabusService;
     constructor(props: SyllabusCreatorProps) {
         super(props);
         this.state = {
             name: '',
-            modificationDate: undefined,
             studyDegree: StudyDegree.Undefined,
             studyForm: FormOfStudy.Undefined,
             learningProfile: LearningProfile.Undefined,
             termAmount: 7,
             entryRequirements: '',
             professionalTitle: ProfessionalTitle.Undefined,
-            formOfGradution: '',
-            graduateSihouette: '',
+            graduationForm: '',
+            graduateSilhouette: '',
             cnpsSum: undefined,
             ectsSum: undefined,
             zzuSum: undefined,
             cnpsMultiplier: undefined,
             extendedTermAmount: false,
             examIssues: [],
+            examIssuesStr: '',
             terms: [],
             degreeCourseLearningOutcomeCodes: [],
             degreeCourseLearningOutcomeCodesStr: '',
             currentStep: this.FirstStep,
             toSyllabuses: false
         };
-
+        this.syllabusService = new SyllabusService();
         this.handleNameChange = this.handleNameChange.bind(this);
         this.handleStudyDegreeChange = this.handleStudyDegreeChange.bind(this);
         this.handleStudyFormChange = this.handleStudyFormChange.bind(this);
@@ -83,6 +85,8 @@ class SyllabusCreator extends Component<SyllabusCreatorProps, SyllabusCreatorSta
         this.handleZzuSumChange = this.handleZzuSumChange.bind(this);
         this.handleExtendedTermAmountChange = this.handleExtendedTermAmountChange.bind(this);
         this.handleExamIssuesChange = this.handleExamIssuesChange.bind(this);
+        this.handleDegreeCourseLearningOutcomeCodesStrChange = this.handleDegreeCourseLearningOutcomeCodesStrChange.bind(this);
+        this.handleExamIssuesStrChange = this.handleExamIssuesStrChange.bind(this);
         this.moveStepForward = this.moveStepForward.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }   
@@ -94,20 +98,34 @@ class SyllabusCreator extends Component<SyllabusCreatorProps, SyllabusCreatorSta
     handleTermAmountChange = (e: React.FormEvent<HTMLInputElement>) => this.setState({termAmount: Number.parseInt(e.currentTarget.value)});
     handleEntryRequirementsChange = (e: React.FormEvent<HTMLInputElement>) => this.setState({entryRequirements: e.currentTarget.value});
     handleProfessionalTitleChange = (e: React.FormEvent<HTMLInputElement>) => this.setState({professionalTitle: StringToProfessionalTitle(e.currentTarget.value)});
-    handleFormOfGradudationChange = (e: React.FormEvent<HTMLInputElement>) => this.setState({formOfGradution: e.currentTarget.value});
-    handleGraduateSihouetteChange = (e: React.FormEvent<HTMLInputElement>) => this.setState({graduateSihouette: e.currentTarget.value});
+    handleFormOfGradudationChange = (e: React.FormEvent<HTMLInputElement>) => this.setState({graduationForm: e.currentTarget.value});
+    handleGraduateSihouetteChange = (e: React.FormEvent<HTMLInputElement>) => this.setState({graduateSilhouette: e.currentTarget.value});
     handleCnpsSumChange = (e: React.FormEvent<HTMLInputElement>) => this.setState({cnpsSum: Number.parseInt(e.currentTarget.value)});
     handleEctsSumChange = (e: React.FormEvent<HTMLInputElement>) => this.setState({ectsSum: Number.parseInt(e.currentTarget.value)});
     handleZzuSumChange = (e: React.FormEvent<HTMLInputElement>) => this.setState({zzuSum: Number.parseInt(e.currentTarget.value)});
     handleExtendedTermAmountChange = (e: React.FormEvent<HTMLInputElement>) => this.setState({extendedTermAmount: e.currentTarget.value ? true : false});
     handleExamIssuesChange = (e: React.FormEvent<HTMLInputElement>) => this.setState({examIssues: e.currentTarget.value.split("\n")});
     handleDegreeCourseLearningOutcomeCodesStrChange = (e: React.FormEvent<HTMLInputElement>) => this.setState({degreeCourseLearningOutcomeCodesStr: e.currentTarget.value});
+    handleExamIssuesStrChange = (e: React.FormEvent<HTMLInputElement>) => this.setState({examIssuesStr: e.currentTarget.value});
 
     handleSubmit(event: FormEvent) {
+        event.preventDefault();
         if (this.state.currentStep === this.LastStep) {
+            const toCreate: Syllabus = new Syllabus(
+                0, this.state.name, this.state.studyDegree, this.state.studyForm, this.state.learningProfile, this.state.termAmount,
+                this.state.entryRequirements, this.state.professionalTitle, this.state.graduationForm, this.state.graduateSilhouette,
+                this.state.cnpsSum, this.state.ectsSum, this.state.zzuSum, this.state.cnpsMultiplier, this.state.extendedTermAmount,
+                this.state.examIssues
+            );
+            
+            this.syllabusService.create(toCreate)
+                .then(response => {
+
+                }).catch(error => {
+
+                });
             this.setState({toSyllabuses: true});
         }
-        event.preventDefault();
     }
 
     loadFirstStepForm() {
@@ -189,43 +207,28 @@ class SyllabusCreator extends Component<SyllabusCreatorProps, SyllabusCreatorSta
                 <InputContainer 
                     label="Sylwetka absolwenta" 
                     type="text" 
-                    name="graduateSihouette" 
-                    value={this.state.graduateSihouette}
+                    name="graduateSilhouette" 
+                    value={this.state.graduateSilhouette}
                     onChangeValue={this.handleGraduateSihouetteChange}
                 />
                 <InputContainer 
                     label="Forma zakończenia studiów" 
                     type="text" 
-                    name="formOfGradution" 
-                    value={this.state.formOfGradution}
+                    name="graduationForm" 
+                    value={this.state.graduationForm}
                     onChangeValue={this.handleFormOfGradudationChange}
                 />
             </div>;
     };
-
-    loadFinalStepForm() {
-        const termSubjectInputList = this.state.terms ? this.state.terms.map(term =>
-            <InputContainer 
-                label={"Semestr " + term.order} 
-                type="text" 
-                name="term" 
-                value={this.state.degreeCourseLearningOutcomeCodesStr}
-                onChangeValue={this.handleDegreeCourseLearningOutcomeCodesStrChange}
-            />
-        ) : '';
-        return <div className="input-step-form">
-            {termSubjectInputList}
-        </div>
-    }
     
     loadSecondStepForm() {
         return <div className="input-step-form">
             <DynamicMultiLineContainer 
                 label="Zagadnienia egzaminacyjne" 
-                type="text" 
-                name="degreeCourseLearningOutcomeCodesStr" 
-                value={this.state.degreeCourseLearningOutcomeCodesStr}
-                onChangeValue={this.handleDegreeCourseLearningOutcomeCodesStrChange}
+                type="textarea" 
+                name="examIssuesStr" 
+                value={this.state.examIssuesStr}
+                onChangeValue={this.handleExamIssuesStrChange}
             />
             <InputContainer 
                 label="Kierunkowe efekty kształcenia" 
@@ -250,16 +253,14 @@ class SyllabusCreator extends Component<SyllabusCreatorProps, SyllabusCreatorSta
 
         let currentStepForm: JSX.Element = this.loadFirstStepForm();
         let currentBtn: JSX.Element = <CustomButton 
-            name={"Dalej (krok " + this.state.currentStep + " z 3)"} 
+            name={"Dalej (krok " + this.state.currentStep + " z " + this.LastStep +")"} 
             buttonClass="main-btn" onClickFunc={this.moveStepForward}
         />;
 
          if (this.state.currentStep === this.FirstStep) {
             currentStepForm = this.loadFirstStepForm()
-        } else if (this.state.currentStep === 2) {
-            currentStepForm = this.loadSecondStepForm()
         } else if (this.state.currentStep === this.LastStep) {
-            currentStepForm = this.loadFinalStepForm()
+            currentStepForm = this.loadSecondStepForm()
             currentBtn = <FunctionalButton name="Wyślij" buttonClass="main-btn" type="submit"/>
         }
 

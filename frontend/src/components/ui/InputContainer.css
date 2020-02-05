@@ -1,4 +1,4 @@
-.input-container input {
+.input-container input, textarea {
     padding: 0.5em 1em;
     flex-grow: 1;
     border-radius: 0.5em;

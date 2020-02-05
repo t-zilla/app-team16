@@ -54,7 +54,10 @@ class Dashboard extends Component<DashboardProps, DashboardState> {
                     authenticationChecked: true
                 })
             }).catch(error => {
-                
+                this.setState({
+                    authenticated: false,
+                    authenticationChecked: true
+                })
             });
     }
 
