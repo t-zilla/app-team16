@@ -170,3 +170,24 @@ kubectl delete daemonsets,replicasets,services,deployments,pods,rc,persistentvol
 kubectl apply -f devops/prod/kubernetes
 minikube service nginx --url
 ```
+
+### Continous Integration - build containers using Jenkins
+
+Build Jenkins image and run (mount docker and docker.sock from host):
+```docker build -f devops/prod/docker/Dockerfile -t team16-jenkins .
+docker run -d -v /var/run/docker.sock:/var/run/docker.sock -v $(which docker):/usr/bin/docker -p 8080:8080 --name=jenkins-master team16-jenkins
+```
+
+Configure Jenkins app (served on host endpoint - localhost:8080)
+1. Install default plugins
+2. Log in
+3. Create pipeline using given Jenkinsfile
+**Rembember - kubernetes local registry must be set up on host and served (on port 5000) **
+4. Run job to produce new versions of containers
+
+Retrigering builds by code changes (local):
+1. Make a change in code
+2. Move whole repository to Jenkins container - it will detect the difference
+```
+sudo docker cp . jenkins-master:/var/jenkins_home
+```
