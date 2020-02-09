@@ -175,16 +175,16 @@ minikube service nginx --url
 
 Build Jenkins image and run (mount docker and docker.sock from host):
 ```bash
-docker build -f devops/prod/docker/Dockerfile -t team16-jenkins .
+docker build -f devops/prod/docker/jenkins/Dockerfile -t team16-jenkins .
 docker run -d -v /var/run/docker.sock:/var/run/docker.sock -v $(which docker):/usr/bin/docker -p 8080:8080 --name=jenkins-master team16-jenkins
 ```
 
-Configure Jenkins app (served on host endpoint - localhost:8080)
-**Rembember - kubernetes local registry must be set up on host and served (on port 5000)**
+Configure Jenkins app (served on host endpoint - localhost:8080).
+**Rembember - kubernetes local registry must be set up on host and served (5000 port should be forwarded)**
 1. Install default plugins
 2. Log in
 3. Create pipeline using given Jenkinsfile
-4. Run job to produce new versions of containers
+4. Use script pollScm.sh to trigger first job
 
 Retrigering builds by code changes (local):
 1. Make a change in code
