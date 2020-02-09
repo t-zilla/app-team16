@@ -23,6 +23,8 @@ RUN /usr/local/bin/install-plugins.sh docker
 
 USER root
 
+RUN addgroup --gid 999 docker && usermod -a -G docker jenkins
+
 # install Maven
 RUN apt-get update && apt-get install -y maven
 USER jenkins
