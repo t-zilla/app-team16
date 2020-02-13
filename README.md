@@ -104,6 +104,8 @@ npm run build  # or: npm run start
 
 ### Requirements
 
+
+
 * docker
 * docker-compose
 * minikube
