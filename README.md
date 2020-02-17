@@ -1,47 +1,21 @@
-# psi-twwo
+# app-team16
 
-## Non-functional requirements
+A web app built with:
 
-### B1. Tworzenie/edycja dokumentów (program kształcenia, karty przedmiotów) tylko przez uprawnione osoby
+* Spring Boot
+* React
+* Docker, Kubernetes, Jenkins
 
-* [Security config (authentication and authorization enabled)](https://github.com/pwr-twwo/app-team16/blob/master/backend/application/src/main/java/com/psi/config/SecurityConfig.java#L48)
-* [Resource config (RBAC required to create CUD resource)](https://github.com/pwr-twwo/app-team16/blob/master/backend/application/src/main/java/com/psi/resource/SyllabusResource.java#L38)
-* [Test specification](https://github.com/pwr-twwo/app-team16/blob/master/test/courses_and_specialities_crud.yml)
+## Table of contents
 
-### B2. Kontrola zmian (rejestracja daty, rodzaju zmiany i osoby, która ją wykonała) w planach/programach/kartach przedmiotów/planach powierzeń
+1. [Backend](#backend)
+2. [Frontend](#frontend)
+3. [Testing](#testing)
+4. [DevOps](#devops)
+    1. [docker-compose](#quick-start-local-environment)
+    2. [Kubernetes](#kubernetes)
+    3. [Jenkins](#continuous-integration)
 
-* [Javers repository annotation](https://github.com/pwr-twwo/app-team16/blob/master/backend/universitydomain/src/main/java/com/psi/subjectcard/repository/SubjectCardRepository.java#L8)
-* [Endpoint to fetch changes captured via Javers](https://github.com/pwr-twwo/app-team16/blob/master/backend/universitydomain/src/main/java/com/psi/subjectcard/service/SubjectCardService.java#L45)
-
-### B3. Logowanie on-site
-
-* [LDIF mock-up](https://github.com/pwr-twwo/app-team16/blob/master/backend/application/src/main/resources/localldapactivedirectory.ldif)
-
-* [LDAP connection config](https://github.com/pwr-twwo/app-team16/blob/master/backend/application/src/main/resources/application.yml#L5)
-
-* [Security config (LDAP enabled)](https://github.com/pwr-twwo/app-team16/blob/master/backend/application/src/main/java/com/psi/config/SecurityConfig.java#L62)
-
-* [Test specification](https://github.com/pwr-twwo/app-team16/blob/master/test/courses_and_specialities_crud.yml)
-
-### WS1. Wygenerowane fragmenty kodu źródłowego z modeli (ewentualnie skrypty tworzące bazę w przypadku relacyjnego modelu danych)
-
-* [Generated DDL](https://github.com/pwr-twwo/app-team16/blob/master/docs/psi.ddl)
-
-## Database schema
-
-* [Schema diagram](https://github.com/pwr-twwo/app-team16/blob/master/docs/db-schema.pdf)
-
-## Testing
-
-Run API tests:
-
-```bash
-docker-compose run api-tester http://nginx /test/courses_and_specialities_crud.yml --print-bodies=true
-```
-
-* [Test specification](https://github.com/pwr-twwo/app-team16/blob/master/test/courses_and_specialities_crud.yml)
-
-* [Test report](https://github.com/pwr-twwo/app-team16/blob/master/docs/test_reports/courses_and_specialities_crud.log)
 
 ## Backend
 
@@ -100,11 +74,19 @@ npm install
 npm run build  # or: npm run start
 ```
 
+## Testing
+
+Run API tests:
+
+```bash
+docker-compose run api-tester http://nginx /test/courses_and_specialities_crud.yml --print-bodies=true
+```
+
+* [Test specification](https://github.com/pwr-twwo/app-team16/blob/master/test/courses_and_specialities_crud.yml)
+
 ## Devops
 
 ### Requirements
-
-
 
 * docker
 * docker-compose
@@ -173,24 +155,28 @@ kubectl apply -f devops/prod/kubernetes
 minikube service nginx --url
 ```
 
-### Continous Integration - build containers using Jenkins
+### Continuous Integration
 
 Build Jenkins image and run (mount docker and docker.sock from host):
+
 ```bash
 docker build -f devops/prod/docker/jenkins/Dockerfile -t team16-jenkins .
 docker run -d -v /var/run/docker.sock:/var/run/docker.sock -v $(which docker):/usr/bin/docker -p 8080:8080 --name=jenkins-master team16-jenkins
 ```
 
-Configure Jenkins app (served on host endpoint - localhost:8080).
+Configure Jenkins app (served on host endpoint - localhost:8080).\
 **Rembember - kubernetes local registry must be set up on host and served (5000 port should be forwarded)**
+
 1. Install default plugins
 2. Log in
 3. Create pipeline using given Jenkinsfile
-4. Use script pollScm.sh to trigger first job
+4. Use script `hooks/pre-push` to trigger first job
 
 Retrigering builds by code changes (local):
+
 1. Make a change in code
 2. Retrigger changes using scipt below (provide USER and PASSWORD for Jenkins)
+
 ```bash
-./pollScm.sh USER PASS
+./hooks/pre-push $USER $PASS
 ```
